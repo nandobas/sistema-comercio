@@ -1,0 +1,10 @@
+{
+  "data": [
+    { "id_forma": 1, "titulo": "arquivo" },
+    { "id_forma": 2, "titulo": "artigo" },
+    { "id_forma": 3, "titulo": "inciso" },
+    { "id_forma": 4, "titulo": "alinea" },
+    { "id_forma": 5, "titulo": "item" },
+    { "id_forma": 6, "titulo": "paragrafo" }
+  ]
+}
