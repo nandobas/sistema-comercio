@@ -1,0 +1,82 @@
+/*
+MySQL Create database
+Database: mywork
+Create Date: 2021-05-19 09:22:46
+Author: Fernando Basilio
+*/
+
+CREATE DATABASE IF NOT EXISTS mywork
+USE mywork;
+
+CREATE TABLE `client` (
+  `client_id` int NOT NULL AUTO_INCREMENT,
+  `client_name` varchar(100) DEFAULT NULL,
+  `client_contacts` varchar(255) DEFAULT NULL,
+	`created_at` date DEFAULT NULL,
+	`updated_at` date DEFAULT NULL,
+	`deleted_at` date DEFAULT NULL,
+  PRIMARY KEY (`client_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `operator` (
+  `operator_id` int NOT NULL AUTO_INCREMENT,
+  `operator_name` varchar(100) DEFAULT NULL,
+  `operator_contacts` varchar(255) DEFAULT NULL,
+	`created_at` date DEFAULT NULL,
+	`updated_at` date DEFAULT NULL,
+	`deleted_at` date DEFAULT NULL,
+  PRIMARY KEY (`operator_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `user` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(100) DEFAULT NULL,
+  `user_email` varchar(255) DEFAULT NULL,
+  `user_password` varchar(255) DEFAULT NULL,
+  `user_active` int DEFAULT 1,
+  `user_checked` int DEFAULT 0,
+  `user_level` int DEFAULT 10,
+  `user_person` varchar(20) DEFAULT 'client',
+  `user_person_id` int NOT NULL,
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE `product` (
+  `product_id` int NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(100) DEFAULT NULL,
+  `product_description` varchar(255) DEFAULT NULL,
+	`created_at` date DEFAULT NULL,
+	`updated_at` date DEFAULT NULL,
+	`deleted_at` date DEFAULT NULL,
+  PRIMARY KEY (`product_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE `composition` (
+  `composition_id` int NOT NULL AUTO_INCREMENT,
+  `product_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `operator_id` int NOT NULL,
+  `client_id` int NOT NULL,
+  `composition_description` varchar(255) DEFAULT NULL,
+  `composition_state` int NOT NULL,
+	`created_at` date DEFAULT NULL,
+	`updated_at` date DEFAULT NULL,
+	`deleted_at` date DEFAULT NULL,
+  PRIMARY KEY (`composition_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `composition_history` (
+  `composition_history_id` int NOT NULL AUTO_INCREMENT,
+  `composition_history_description` varchar(255) DEFAULT NULL,
+  `user_id` int NOT NULL,
+	`created_at` date DEFAULT NULL,
+	`updated_at` date DEFAULT NULL,
+	`deleted_at` date DEFAULT NULL,
+  PRIMARY KEY (`composition_history_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
