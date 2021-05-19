@@ -2,8 +2,7 @@
   <Toast />
   <div id="nav">
     <router-link to="/">Home</router-link> |
-    <router-link to="/livros">Livros</router-link> |
-    <router-link to="/arquivos">Arquivos</router-link>
+    <router-link to="/client">Clientes</router-link>
   </div>
   <router-view />
 </template>

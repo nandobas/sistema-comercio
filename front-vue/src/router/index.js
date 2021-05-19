@@ -17,29 +17,14 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/arquivos",
-    name: "Arquivos",
-    component: () => import("../views/Arquivos/Arquivos.vue"),
+    path: "/client/:intId",
+    name: "EditClient",
+    component: () => import("../views/Clients/Clients.vue"),
   },
   {
-    path: "/legislacoes/:fileId/:parentId",
-    name: "Legislacoes",
-    component: () => import("../views/Legislacoes/Legislacoes.vue"),
-  },
-  {
-    path: "/livros",
-    name: "Livros",
-    component: () => import("../views/Livros/Livros.vue"),
-  },
-  {
-    path: "/indices/:fileId/:parentId",
-    name: "Indices",
-    component: () => import("../views/Indices/Indices.vue"),
-  },
-  {
-    path: "/livro/:idLivro",
-    name: "Livro",
-    component: () => import("../views/Livros/Livro.vue"),
+    path: "/client",
+    name: "Clients",
+    component: () => import("../views/Clients/Clients.vue"),
   },
 ];
 

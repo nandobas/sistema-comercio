@@ -15,7 +15,7 @@ class ClientService
     public function List()
     {
         $return = [];
-        $return['return'] = $this->repository->getRegisters();
+        $return['docs'] = $this->repository->getRegisters();
         $return['status']=true; 
         $return['codeHTTP']=200;
        
@@ -25,7 +25,7 @@ class ClientService
     public function Get(int $intCod)
     {
         $return = [];
-        $return['return'] = $this->repository->getRegisters($intCod);
+        $return['docs'] = $this->repository->getRegisters($intCod);
         $return['status']=true; 
         $return['codeHTTP']=200;
        

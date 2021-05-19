@@ -1,20 +1,5 @@
 <template>
-  <div class="indices">
-    <Panel :header="getSubdivisaoIndiceSelecionada().titulo">
-      {{
-        this.parentId == 0
-          ? this.livro.nome_livro
-          : getSubdivisaoIndiceSelecionada().custom
-      }}
-      <Breadcrumb
-        :home="{
-          icon: 'pi pi-home',
-          url: app_home + '/indices/' + fileId + '/0',
-          label: this.livro.nome_livro ? ' ' + this.livro.nome_livro : '',
-        }"
-        :model="arr_indice_parents"
-      />
-    </Panel>
+  <div class="clients">
     <div class="card">
       <Toolbar class="p-mb-4">
         <template #left>
@@ -30,21 +15,21 @@
             style="margin-left:3px;"
             class="p-button-danger"
             @click="confirmDeleteSelected"
-            :disabled="!selectedIndices || !selectedIndices.length"
+            :disabled="!selectedClients || !selectedClients.length"
           />
         </template>
       </Toolbar>
       <DataTable
-        :value="indices"
+        :value="clients"
         :paginator="true"
         :rows="10"
         :rowsPerPageOptions="[10, 20, 50]"
         :loading="loading"
-        :globalFilterFields="['id_subdivisao_indice', 'descricao']"
+        :globalFilterFields="['client_id', 'client_name']"
         v-model:filters="filters"
-        v-model:selection="selectedIndices"
+        v-model:selection="selectedClients"
         selectionMode="checkbox"
-        dataKey="id_subdivisao_indice"
+        dataKey="client_id"
         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
         currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}"
         filterDisplay="menu"
@@ -78,13 +63,9 @@
           style="width: 3rem"
           :exportable="false"
         ></Column>
-        <Column field="id_indice" header="ID"></Column>
-        <Column field="id_subdivisao" header="Tipo">
-          <template #body="slotProps">
-            {{ getTituloSubdivisao(slotProps.data.id_subdivisao) }}
-          </template>
-        </Column>
-        <Column field="indice.descricao" header="Descrição"></Column>
+        <Column field="client_id" header="ID"></Column>
+        <Column field="client_name" header="Nome"></Column>
+        <Column field="client_contacts" header="Contatos"></Column>
 
         <Column
           headerStyle="width: 8em"
@@ -104,7 +85,7 @@
               type="button"
               icon="pi pi-pencil"
               class="p-button-warning"
-              @click="editIndice(slotProps)"
+              @click="editClient(slotProps)"
             ></Button>
           </template>
         </Column>
@@ -112,27 +93,21 @@
     </div>
 
     <Dialog
-      v-model:visible="indiceDialog"
+      v-model:visible="clientDialog"
       :style="{ width: '450px' }"
-      header="Detalhes do Indice"
+      header="Detalhes do Cliente"
       :modal="true"
       class="p-fluid"
     >
       <div class="p-field">
-        <label for="id_subdivisao">Subdivisão do registro</label>
-        <Dropdown
-          v-model="selectedTipo"
-          :options="subdivisoes_indice.filter((val) => val.id_subdivisao != 1)"
-          optionLabel="titulo"
-          optionValue="id_subdivisao"
-          placeholder="Selecione o tipo de subdivisão"
-        />
+        <label for="client_name">Nome</label>
+        <InputText id="client_name" type="text" v-model="client.client_name" />
       </div>
       <div class="p-field">
-        <label for="descricao">Descrição</label>
+        <label for="client_contacts">Contatos</label>
         <Textarea
-          id="descricao"
-          v-model="subdivisao_indice.indice.descricao"
+          id="client_contacts"
+          v-model="client.client_contacts"
           required="true"
           rows="3"
           cols="20"
@@ -149,22 +124,21 @@
           label="Salvar"
           icon="pi pi-check"
           class="p-button-text"
-          @click="saveIndice"
+          @click="saveClient"
         />
       </template>
     </Dialog>
 
     <Dialog
-      v-model:visible="deleteIndiceDialog"
+      v-model:visible="deleteClientDialog"
       :style="{ width: '450px' }"
       header="Confirm"
       :modal="true"
     >
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
-        <span v-if="subdivisao_indice"
-          >Você tem certeza que deseja remover
-          <b>{{ subdivisao_indice.id_subdivisao_indice }}</b
+        <span v-if="client"
+          >Você tem certeza que deseja remover <b>{{ client.client_name }}</b
           >?</span
         >
       </div>
@@ -173,21 +147,21 @@
           label="Não"
           icon="pi pi-times"
           class="p-button-text"
-          @click="deleteIndiceDialog = false"
+          @click="deleteClientDialog = false"
         />
         <Button label="Sim" icon="pi pi-check" class="p-button-text" />
       </template>
     </Dialog>
 
     <Dialog
-      v-model:visible="deleteIndicesDialog"
+      v-model:visible="deleteClientsDialog"
       :style="{ width: '450px' }"
       header="Confirmação de Exclusão"
       :modal="true"
     >
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
-        <span v-if="subdivisao_indice"
+        <span v-if="client"
           >Você tem certeza que deseja remover a seleção?</span
         >
       </div>
@@ -196,19 +170,19 @@
           label="Não"
           icon="pi pi-times"
           class="p-button-text"
-          @click="deleteIndicesDialog = false"
+          @click="deleteClientsDialog = false"
         />
         <Button
           label="Sim"
           icon="pi pi-check"
           class="p-button-text"
-          @click="deleteSelectedIndices"
+          @click="deleteSelectedClients"
         />
       </template>
     </Dialog>
   </div>
 </template>
-<script src="./Indices.js"></script>
+<script src="./Clients.js"></script>
 <style lang="scss">
-@import "./indices.scss";
+@import "./Clients.scss";
 </style>
