@@ -30,6 +30,7 @@ export default {
     return {
       app_home: process.env.VUE_APP_HOME,
       clients: null,
+      client: {},
       filters: null,
       loading: true,
       clientDialog: false,

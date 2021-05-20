@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    Seja bem vindo. Que tal começar acessando os Arquivos?
+    Seja bem vindo.
   </div>
 </template>
 
