@@ -8,13 +8,26 @@
 </template>
 
 <script>
+import Api from "@/service/api.js";
 export default {
   name: "App",
   mounted() {},
   data() {
     return {
       app_home: process.env.VUE_APP_HOME,
+      isSetToken: false,
     };
+  },
+  mounted: function() {
+    Object.noty = this.$noty;
+    this.$root.$api = new Api();
+    if (localStorage.getItem("token")) {
+      this.isSetToken = true;
+    } else {
+      this.$router.push({
+        path: "/login",
+      });
+    }
   },
   methods: {
     showSuccess() {
