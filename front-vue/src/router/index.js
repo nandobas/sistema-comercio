@@ -29,6 +29,16 @@ const routes = [
       auth: true,
     },
   },
+  // // ADMIN ROUTES
+  // {
+  //   path: "/client",
+  //   name: "admin.client",
+  //   component: () => import("../views/Clients/AdminClients.vue"),
+  //   meta: {
+  //     auth: true,
+  //     roles: 2,
+  //   },
+  // },
 
   {
     path: "/register",
@@ -54,15 +64,7 @@ const routes = [
       auth: false,
     },
   },
-  /*// USER ROUTES
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: Dashboard,
-    meta: {
-      auth: true,
-    },
-  },
+  /*
   // ADMIN ROUTES
   {
     path: "/admin",
@@ -82,6 +84,23 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  let token = localStorage.getItem("token");
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user);
+  if (to.matched.some((record) => record.meta.auth)) {
+    if (token) {
+      console.log(next.name);
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
+});
+
 /*
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {

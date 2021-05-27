@@ -24,9 +24,9 @@ export default {
     if (localStorage.getItem("token")) {
       this.isSetToken = true;
     } else {
-      this.$router.push({
+      /*this.$router.push({
         path: "/login",
-      });
+      });*/
     }
   },
   methods: {
