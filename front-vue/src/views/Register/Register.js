@@ -14,26 +14,32 @@ export default {
   methods: {
     register() {
       var app = this;
-      this.$auth.register({
-        data: {
+      this.$root.$api
+        .post("/auth/register", {
           email: app.email,
           password: app.password,
           password_confirmation: app.password_confirmation,
-        },
-        success: function() {
-          app.success = true;
-          this.$router.push({
-            name: "login",
-            params: { successRegistrationRedirect: true },
-          });
-        },
-        error: function(res) {
+        })
+        .then((response) => {
+          if (response.status == "success") {
+            app.success = true;
+            this.$router.push({
+              name: "login",
+              params: { successRegistrationRedirect: true },
+            });
+          } else if (response.status == "error") {
+            console.log(response.errors);
+            app.has_error = true;
+            app.error = response.error;
+            app.errors = response.errors || {};
+          }
+        })
+        .catch((res) => {
           console.log(res.response.data.errors);
           app.has_error = true;
           app.error = res.response.data.error;
           app.errors = res.response.data.errors || {};
-        },
-      });
+        });
     },
   },
 };

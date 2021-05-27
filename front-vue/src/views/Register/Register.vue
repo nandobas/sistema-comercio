@@ -68,3 +68,7 @@
     </div>
   </div>
 </template>
+<script src="./Register.js"></script>
+<style lang="scss">
+@import "./Register.scss";
+</style>

@@ -64,6 +64,14 @@ const routes = [
       auth: false,
     },
   },
+  {
+    path: "/logout",
+    name: "logout",
+    component: () => import("../views/Login/Logout.vue"),
+    meta: {
+      auth: true,
+    },
+  },
   /*
   // ADMIN ROUTES
   {

@@ -14,12 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::prefix('auth')->group(function () {
+
+    //Logout
+    Route::post('logout', 'AuthController@logout');
+
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
     Route::get('refresh', 'AuthController@refresh');
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('user', 'AuthController@user');
-        Route::post('logout', 'AuthController@logout');
     });
 });
 Route::group(['middleware' => 'auth:api'], function(){
@@ -38,3 +41,4 @@ Route::middleware('api')->get('/client', 'ClientController@List');
 Route::middleware('api')->get('/client/{int_cod}', 'ClientController@Get');
 Route::middleware('api')->post('/client/save/', 'ClientController@Save');
 Route::middleware('api')->post('/client/remove/', 'ClientController@Remove');
+
