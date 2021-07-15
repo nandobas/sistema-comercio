@@ -13,3 +13,16 @@ services:
       - ./db-mysql/data:/var/lib/mysql
     ports:
       - "3306:3306"
+  api:
+    tty: true
+    depends_on:
+      - db-mysql
+    links:
+      - db-mysql
+    image: api
+    container_name: api-php-crud
+    build: "api"
+    volumes:
+      - ./api-php:/var/www/html
+    ports:
+      - "80:8000"
