@@ -30,7 +30,7 @@ export default class Api {
         Object.assign({}, dados),
         {
           headers: {
-            "Api-Token": this.token,
+            Authorization: this.token,
           },
         }
       )
