@@ -17,6 +17,7 @@ export default {
         .get("/users/" + sub, token)
         .then((response) => {
           localStorage.setItem("user", JSON.stringify(response.user));
+          this.$emit("setStateToken", true);
           router.push({
             path: "/",
           });

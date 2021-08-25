@@ -1,10 +1,20 @@
 <template>
-  <Toast />
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/client">Clientes</router-link>
+  <div>
+    <Toast />
+    <div id="nav">
+      <div v-if="isSetToken">
+        <router-link to="/">Home</router-link> |
+        <router-link to="/client">Clientes</router-link> |
+        <router-link to="/logout" @click="isSetToken = false">Sair</router-link>
+      </div>
+      <div v-else>
+        <router-link to="/login">Login</router-link>
+      </div>
+      <div>
+        <router-view @setStateToken="setStateToken"></router-view>
+      </div>
+    </div>
   </div>
-  <router-view />
 </template>
 
 <script>
@@ -37,6 +47,10 @@ export default {
         detail: "Message Content",
         life: 3000,
       });
+    },
+    setStateToken(bl_state_token) {
+      console.log("call setStateToken");
+      this.isSetToken = bl_state_token;
     },
   },
 };

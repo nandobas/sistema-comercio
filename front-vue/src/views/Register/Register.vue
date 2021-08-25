@@ -1,16 +1,15 @@
 <template>
   <div class="container">
     <div class="card card-default">
-      <div class="card-header">Inscription</div>
+      <div class="card-header">Inscrição</div>
       <div class="card-body">
         <div class="alert alert-danger" v-if="has_error && !success">
           <p v-if="error == 'registration_validation_error'">
-            Erreur(s) de validation, veuillez consulter le(s) message(s)
-            ci-dessous.
+            Erro de validação
           </p>
           <p v-else>
-            Erreur, impossible de s'inscrire pour le moment. Si le problème
-            persiste, veuillez contacter un administrateur.
+            Erro. Foi impossível continuar nomomento. <br />
+            Se o problema persistir, contate o administrador.
           </p>
         </div>
         <form
@@ -39,7 +38,7 @@
             class="form-group"
             v-bind:class="{ 'has-error': has_error && errors.password }"
           >
-            <label for="password">Mot de passe</label>
+            <label for="password">Senha</label>
             <input
               type="password"
               id="password"
@@ -54,7 +53,7 @@
             class="form-group"
             v-bind:class="{ 'has-error': has_error && errors.password }"
           >
-            <label for="password_confirmation">Confirmation mot de passe</label>
+            <label for="password_confirmation">Confirme a senha</label>
             <input
               type="password"
               id="password_confirmation"
@@ -62,7 +61,7 @@
               v-model="password_confirmation"
             />
           </div>
-          <button type="submit" class="btn btn-default">Inscription</button>
+          <button type="submit" class="btn btn-default">Cadastrar</button>
         </form>
       </div>
     </div>
