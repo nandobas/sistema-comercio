@@ -14,17 +14,18 @@ export default {
       this.$root.$api
         .post("/auth/logout", {})
         .then((response) => {
-          if (response.status == "success") {
-            app.success = true;
-            this.$router.push({
-              name: "login",
-            });
+          app.success = true;
+          this.$router.push({
+            name: "login",
+          });
 
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
-          } else if (response.status == "error") {
-            console.log(response.errors);
-          }
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+
+          // if (response.status == "success") {
+          // } else if (response.status == "error") {
+          //   console.log(response.errors);
+          // }
         })
         .catch((res) => {
           console.log(res.errors);

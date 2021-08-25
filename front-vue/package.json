@@ -15,7 +15,7 @@
     "vue-axios": "^3.2.4",
     "vue-jwt-decode": "^0.1.0",
     "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-alpha.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

@@ -2,16 +2,18 @@
   <div>
     <Toast />
     <div id="nav">
-      <div v-if="isSetToken">
+      <div v-if="bl_state_token">
         <router-link to="/">Home</router-link> |
         <router-link to="/client">Clientes</router-link> |
-        <router-link to="/logout" @click="isSetToken = false">Sair</router-link>
+        <router-link to="/logout" @click="bl_state_token = false"
+          >Sair</router-link
+        >
       </div>
       <div v-else>
         <router-link to="/login">Login</router-link>
       </div>
       <div>
-        <router-view @setStateToken="setStateToken"></router-view>
+        <router-view></router-view>
       </div>
     </div>
   </div>
@@ -19,20 +21,34 @@
 
 <script>
 import Api from "@/service/api.js";
+import { mapGetters } from "vuex";
 export default {
   name: "App",
   mounted() {},
   data() {
     return {
       app_home: process.env.VUE_APP_HOME,
-      isSetToken: false,
     };
+  },
+  computed: {
+    //   ...mapGetters("token", {
+    //     bl_state_token: "getStateToken",
+    //   }),
+
+    bl_state_token: {
+      get() {
+        return this.$store.state.token.bl_state_token;
+      },
+      set(newValue) {
+        this.$store.commit("token/setStateToken", newValue);
+      },
+    },
   },
   mounted: function() {
     Object.noty = this.$noty;
     this.$root.$api = new Api();
     if (localStorage.getItem("token")) {
-      this.isSetToken = true;
+      this.bl_state_token = true;
     } else {
       /*this.$router.push({
         path: "/login",
@@ -47,10 +63,6 @@ export default {
         detail: "Message Content",
         life: 3000,
       });
-    },
-    setStateToken(bl_state_token) {
-      console.log("call setStateToken");
-      this.isSetToken = bl_state_token;
     },
   },
 };

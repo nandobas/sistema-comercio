@@ -1,12 +1,10 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 
-export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+//import modules
+import token from "./token";
+
+export default new createStore({
   modules: {
-  }
-})
+    token: token,
+  },
+});
