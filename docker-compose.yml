@@ -6,7 +6,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     cap_add:
       - SYS_NICE #  incluir as regras necessárias para permitir o que o MySQL execute functions
-    container_name: mysql-crud
+    container_name: mysql-comercio
     environment:
       MYSQL_ROOT_PASSWORD: db-#12.bas
     volumes:
@@ -20,7 +20,7 @@ services:
     links:
       - db-mysql
     image: api
-    container_name: api-php-crud
+    container_name: api-php-comercio
     build: "api-php"
     volumes:
       - ./api-php:/var/www/html
