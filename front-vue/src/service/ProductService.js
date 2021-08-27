@@ -1,15 +1,17 @@
 import axios from "axios";
 
-export default class ClientService {
-  getClients() {
-    return axios.get(process.env.VUE_APP_ROOT_API + "/client").then((res) => {
+export default class ProductService {
+  getProducts() {
+    return axios.get(process.env.VUE_APP_ROOT_API + "/product").then((res) => {
       return res.data;
     });
   }
 
-  saveClient(p_Client) {
+  saveProduct(p_Product) {
     return axios
-      .post(process.env.VUE_APP_ROOT_API + "/client/save", { data: p_Client })
+      .post(process.env.VUE_APP_ROOT_API + "/product/save", {
+        data: p_Product,
+      })
       .then((response) => {
         return response.data;
       })
@@ -19,11 +21,11 @@ export default class ClientService {
       });
   }
 
-  async deleteClient(p_Client) {
+  async deleteProduct(p_Product) {
     return axios
       .post(
-        process.env.VUE_APP_ROOT_API + "/client/remove",
-        Object.assign({}, p_Client)
+        process.env.VUE_APP_ROOT_API + "/product/remove",
+        Object.assign({}, p_Product)
       )
       .then((response) => {
         return response.data;

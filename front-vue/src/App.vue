@@ -5,6 +5,8 @@
       <div v-if="bl_state_token">
         <router-link to="/">Home</router-link> |
         <router-link to="/client">Clientes</router-link> |
+        <router-link to="/provider">Fornecedores</router-link> |
+        <router-link to="/product">Produtos</router-link> |
         <router-link to="/logout" @click="bl_state_token = false"
           >Sair</router-link
         >

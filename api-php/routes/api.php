@@ -42,3 +42,14 @@ Route::middleware('api')->get('/client/{int_cod}', 'ClientController@Get');
 Route::middleware('api')->post('/client/save/', 'ClientController@Save');
 Route::middleware('api')->post('/client/remove/', 'ClientController@Remove');
 
+//Provider
+Route::middleware('api')->get('/provider', 'ProviderController@List');
+Route::middleware('api')->get('/provider/{int_cod}', 'ProviderController@Get');
+Route::middleware('api')->post('/provider/save/', 'ProviderController@Save');
+Route::middleware('api')->post('/provider/remove/', 'ProviderController@Remove');
+
+//Product
+Route::middleware('api')->get('/product', 'ProductController@List');
+Route::middleware('api')->get('/product/{int_cod}', 'ProductController@Get');
+Route::middleware('api')->post('/product/save/', 'ProductController@Save');
+Route::middleware('api')->post('/product/remove/', 'ProductController@Remove');

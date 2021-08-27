@@ -29,6 +29,32 @@ const routes = [
       auth: true,
     },
   },
+  {
+    path: "/provider/:intId",
+    name: "EditProvider",
+    component: () => import("../views/Providers/Providers.vue"),
+  },
+  {
+    path: "/provider",
+    name: "Providers",
+    component: () => import("../views/Providers/Providers.vue"),
+    meta: {
+      auth: true,
+    },
+  },
+  {
+    path: "/product/:intId",
+    name: "EditProduct",
+    component: () => import("../views/Products/Products.vue"),
+  },
+  {
+    path: "/product",
+    name: "Products",
+    component: () => import("../views/Products/Products.vue"),
+    meta: {
+      auth: true,
+    },
+  },
   // // ADMIN ROUTES
   // {
   //   path: "/client",

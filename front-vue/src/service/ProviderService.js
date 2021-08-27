@@ -1,15 +1,17 @@
 import axios from "axios";
 
-export default class ClientService {
-  getClients() {
-    return axios.get(process.env.VUE_APP_ROOT_API + "/client").then((res) => {
+export default class ProviderService {
+  getProviders() {
+    return axios.get(process.env.VUE_APP_ROOT_API + "/provider").then((res) => {
       return res.data;
     });
   }
 
-  saveClient(p_Client) {
+  saveProvider(p_Provider) {
     return axios
-      .post(process.env.VUE_APP_ROOT_API + "/client/save", { data: p_Client })
+      .post(process.env.VUE_APP_ROOT_API + "/provider/save", {
+        data: p_Provider,
+      })
       .then((response) => {
         return response.data;
       })
@@ -19,11 +21,11 @@ export default class ClientService {
       });
   }
 
-  async deleteClient(p_Client) {
+  async deleteProvider(p_Provider) {
     return axios
       .post(
-        process.env.VUE_APP_ROOT_API + "/client/remove",
-        Object.assign({}, p_Client)
+        process.env.VUE_APP_ROOT_API + "/provider/remove",
+        Object.assign({}, p_Provider)
       )
       .then((response) => {
         return response.data;
