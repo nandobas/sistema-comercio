@@ -13,16 +13,16 @@ services:
       - ./db-mysql/data:/var/lib/mysql
     ports:
       - "8306:3306"
-  # api-php:
-  #   tty: true
-  #   depends_on:
-  #     - db-mysql
-  #   links:
-  #     - db-mysql
-  #   image: api
-  #   container_name: api-php-comercio
-  #   build: "api-php"
-  #   volumes:
-  #     - ./api-php:/var/www/html
-  #   ports:
-  #     - "8003:80"
+  api-php:
+    tty: true
+    depends_on:
+      - db-mysql
+    links:
+      - db-mysql
+    image: api
+    container_name: api-php-comercio
+    build: "api-php"
+    volumes:
+      - ./api-php:/var/www/html
+    ports:
+      - "8003:80"

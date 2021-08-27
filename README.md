@@ -24,6 +24,10 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Common commands
 
+Run Docker:
+docker-compose build --force-rm
+docker-compose up
+
 Run Local:
 php artisan serve --port=8003
 
