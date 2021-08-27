@@ -5,8 +5,16 @@ Create Date: 2021-05-19 09:22:46
 Author: Fernando Basilio
 */
 
-CREATE DATABASE IF NOT EXISTS mywork
-USE mywork;
+CREATE DATABASE IF NOT EXISTS comercio;
+
+/*
+> use mysql
+> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'db-#12.bas';
+> GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
+> FLUSH PRIVILEGES;
+*/
+
+USE comercio;
 
 CREATE TABLE `client` (
   `client_id` int NOT NULL AUTO_INCREMENT,
