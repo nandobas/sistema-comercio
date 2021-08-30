@@ -35,6 +35,8 @@ class ProductRepository
 
         $product->save();
 
+        if(isset($product->id))
+            $product->product_id = $product->id;
         $product = Product::where("product_id", $product->product_id)->first();
 
         return $product;

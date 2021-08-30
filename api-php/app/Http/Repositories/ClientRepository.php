@@ -35,6 +35,9 @@ class ClientRepository
 
         $client->save();
 
+        if(isset($client->id))
+            $client->client_id = $client->id;
+
         $client = Client::where("client_id", $client->client_id)->first();
 
         return $client;

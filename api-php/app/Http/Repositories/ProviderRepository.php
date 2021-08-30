@@ -35,6 +35,9 @@ class ProviderRepository
 
         $provider->save();
 
+        if(isset($provider->id))
+            $provider->provider_id = $provider->id;
+
         $provider = Provider::where("provider_id", $provider->provider_id)->first();
 
         return $provider;
