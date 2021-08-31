@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompositionProductsTable extends Migration
+class CreatePortifolioCompositionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateCompositionProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('composition_products', function (Blueprint $table) {
-            $table->increments( 'composition_product_id' );
-            $table->string('composition_history_details', 255)->nullable();
-            $table->decimal('composition_history_value', 19, 2);
-            $table->integer( 'product_id' )->unsigned();
+        Schema::create('portifolio_compositions', function (Blueprint $table) {
+            $table->increments( 'portifolio_composition_id' );
+            $table->integer( 'portifolio_id' )->unsigned();
             $table->integer( 'composition_id' )->unsigned();
-            $table->timestamps();
-            $table->softDeletes();
             
             $table->foreign( 'composition_id' )
                     ->references( 'composition_id' )->on( 'compositions' )
+                    ->onDelete( 'cascade' );
+            
+            $table->foreign( 'portifolio_id' )
+                    ->references( 'portifolio_id' )->on( 'portifolios' )
                     ->onDelete( 'cascade' );
         });
     }
@@ -35,6 +35,6 @@ class CreateCompositionProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('composition_products');
+        Schema::dropIfExists('portifolio_compositions');
     }
 }

@@ -17,10 +17,7 @@ class CreateCompositionsTable extends Migration
             $table->increments( 'composition_id' );
             $table->integer('composition_state');
             $table->string('composition_description', 255)->nullable();
-            $table->integer( 'product_id' )->unsigned();
-            $table->integer( 'user_id' )->unsigned();
-            $table->integer( 'operator_id' )->unsigned();
-            $table->integer( 'client_id' )->unsigned();
+            $table->integer( 'composition_order' )->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });
