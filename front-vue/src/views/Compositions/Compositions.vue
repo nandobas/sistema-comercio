@@ -25,7 +25,11 @@
         :rows="10"
         :rowsPerPageOptions="[10, 20, 50]"
         :loading="loading"
-        :globalFilterFields="['composition_id', 'composition_name']"
+        :globalFilterFields="[
+          'composition_id',
+          'composition_name',
+          'composition_description',
+        ]"
         v-model:filters="filters"
         v-model:selection="selectedCompositions"
         selectionMode="checkbox"
@@ -64,6 +68,7 @@
           :exportable="false"
         ></Column>
         <Column field="composition_id" header="ID"></Column>
+        <Column field="composition_name" header="Nome"></Column>
         <Column field="composition_description" header="Descrição"></Column>
         <Column field="composition_state" header="Ativo/ inativo">
           <template #body="slotProps">
@@ -98,6 +103,12 @@
       class="p-fluid"
     >
       <div class="p-field">
+        <label for="composition_name">Nome</label>
+        <InputText
+          id="composition_name"
+          type="text"
+          v-model="composition.composition_name"
+        />
         <label for="composition_description">Descrição</label>
         <Textarea
           id="composition_description"

@@ -112,6 +112,14 @@ export default {
       )
         return false;
 
+      if (
+        !(
+          this.composition.composition_name &&
+          this.composition.composition_name.trim()
+        )
+      )
+        return false;
+
       let objComposition = { ...this.composition };
 
       this.compositionService.saveComposition(objComposition).then((data) => {

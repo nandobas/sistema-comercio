@@ -16,8 +16,8 @@ class CreateCompositionsTable extends Migration
         Schema::create('compositions', function (Blueprint $table) {
             $table->increments( 'composition_id' );
             $table->integer('composition_state');
+            $table->string('composition_name', 120)->nullable();
             $table->string('composition_description', 255)->nullable();
-            $table->integer( 'composition_order' )->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });

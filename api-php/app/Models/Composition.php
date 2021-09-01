@@ -11,6 +11,6 @@ class Composition extends Model
     use HasFactory;
     use SoftDeletes;
     protected $primaryKey = 'composition_id';
-    protected $fillable = ['composition_id', 'composition_state', 'composition_description', 'composition_order'];
+    protected $fillable = ['composition_id', 'composition_state', 'composition_name', 'composition_description'];
 
 }

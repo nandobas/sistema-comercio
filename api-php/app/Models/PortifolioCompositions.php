@@ -10,7 +10,7 @@ class PortifolioCompositions extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['portifolio_composition_id', 'portifolio_id', 'composition_id'];
+    protected $fillable = ['portifolio_composition_id', 'portifolio_id', 'composition_id', 'portifolio_composition_order'];
 
     public function compositions()
     {    

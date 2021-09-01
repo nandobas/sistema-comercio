@@ -17,6 +17,8 @@ class CreatePortifolioCompositionsTable extends Migration
             $table->increments( 'portifolio_composition_id' );
             $table->integer( 'portifolio_id' )->unsigned();
             $table->integer( 'composition_id' )->unsigned();
+            $table->integer( 'portifolio_composition_order' )->unsigned();
+            
             
             $table->foreign( 'composition_id' )
                     ->references( 'composition_id' )->on( 'compositions' )
