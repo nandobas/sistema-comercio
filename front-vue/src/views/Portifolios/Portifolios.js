@@ -143,7 +143,8 @@ export default {
     },
     editPortifolio(p_portifolio) {
       this.portifolio = { ...p_portifolio.data };
-      //this.selectedTipo = this.portifolio.id_subdivisao;
+      this.portifolio.portifolio_state =
+        this.portifolio.portifolio_state == 1 ? true : false;
       this.portifolioDialog = true;
     },
     confirmDeletePortifolio(portifolio) {

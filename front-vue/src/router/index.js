@@ -68,6 +68,19 @@ const routes = [
       auth: true,
     },
   },
+  {
+    path: "/composition/:intId",
+    name: "EditComposition",
+    component: () => import("../views/Compositions/Compositions.vue"),
+  },
+  {
+    path: "/composition",
+    name: "Compositions",
+    component: () => import("../views/Compositions/Compositions.vue"),
+    meta: {
+      auth: true,
+    },
+  },
   // // ADMIN ROUTES
   // {
   //   path: "/client",

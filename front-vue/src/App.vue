@@ -13,7 +13,8 @@
           >
         </p>
         <p>
-          <router-link to="/portifolio">Portifolios</router-link>
+          <router-link to="/portifolio">Portifolios</router-link> |
+          <router-link to="/composition">Cardápios</router-link>
         </p>
       </div>
       <div v-else>
