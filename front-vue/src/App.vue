@@ -3,13 +3,18 @@
     <Toast />
     <div id="nav">
       <div v-if="bl_state_token">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/client">Clientes</router-link> |
-        <router-link to="/provider">Fornecedores</router-link> |
-        <router-link to="/product">Produtos</router-link> |
-        <router-link to="/logout" @click="bl_state_token = false"
-          >Sair</router-link
-        >
+        <p>
+          <router-link to="/">Home</router-link> |
+          <router-link to="/client">Clientes</router-link> |
+          <router-link to="/provider">Fornecedores</router-link> |
+          <router-link to="/product">Produtos</router-link> |
+          <router-link to="/logout" @click="bl_state_token = false"
+            >Sair</router-link
+          >
+        </p>
+        <p>
+          <router-link to="/portifolio">Portifolios</router-link>
+        </p>
       </div>
       <div v-else>
         <router-link to="/login">Login</router-link>

@@ -55,6 +55,19 @@ const routes = [
       auth: true,
     },
   },
+  {
+    path: "/portifolio/:intId",
+    name: "EditPortifolio",
+    component: () => import("../views/Portifolios/Portifolios.vue"),
+  },
+  {
+    path: "/portifolio",
+    name: "Portifolios",
+    component: () => import("../views/Portifolios/Portifolios.vue"),
+    meta: {
+      auth: true,
+    },
+  },
   // // ADMIN ROUTES
   // {
   //   path: "/client",

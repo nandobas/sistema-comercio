@@ -10,6 +10,7 @@ class Portifolio extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $primaryKey = 'portifolio_id';
     protected $fillable = ['portifolio_id', 'portifolio_state', 'portifolio_description'];
     
     public function portifolio_compositions()

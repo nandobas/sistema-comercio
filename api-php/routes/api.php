@@ -53,3 +53,9 @@ Route::middleware('api')->get('/product', 'ProductController@List');
 Route::middleware('api')->get('/product/{int_cod}', 'ProductController@Get');
 Route::middleware('api')->post('/product/save/', 'ProductController@Save');
 Route::middleware('api')->post('/product/remove/', 'ProductController@Remove');
+
+//Portifolio
+Route::middleware('api')->get('/portifolio', 'PortifolioController@List');
+Route::middleware('api')->get('/portifolio/{int_cod}', 'PortifolioController@Get');
+Route::middleware('api')->post('/portifolio/save/', 'PortifolioController@Save');
+Route::middleware('api')->post('/portifolio/remove/', 'PortifolioController@Remove');
