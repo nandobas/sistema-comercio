@@ -82,6 +82,13 @@ export default {
       this.intId = p_to.params.intId;
     },
 
+    openChidrens(p_objPortifolio) {
+      let portifolio_id = p_objPortifolio.data.portifolio_id;
+      this.$router.push({
+        path: "portifolio/portifolio_composition",
+      });
+    },
+
     openNew() {
       this.submitted = false;
       this.portifolioDialog = true;

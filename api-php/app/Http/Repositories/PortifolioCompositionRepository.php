@@ -7,12 +7,11 @@ class PortifolioCompositionRepository
 {
     public function getRegisters(int $intCod=0){
         
-        $return = new PortifolioCompositionComposition;
+        $return = new PortifolioComposition;
         if($intCod != 0)              
             $return = $return->whereRaw("portifolio_composition_id = {$intCod}");           
         
-        $return = $return->orderBy('updated_at')
-                    ->get();
+        $return = $return->get();
 
         if($return)
             $return = $return->toArray();

@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PortifolioCompositions extends Model
+class PortifolioComposition extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     protected $fillable = ['portifolio_composition_id', 'portifolio_id', 'composition_id', 'portifolio_composition_order'];
 
     public function compositions()
