@@ -4,7 +4,7 @@
       <Toolbar class="p-mb-4">
         <template #left>
           <Button
-            label="Novo"
+            label="Adicionar"
             icon="pi pi-plus"
             class="p-button-success p-mr-2"
             @click="openNew"
@@ -66,8 +66,16 @@
           style="width: 3rem"
           :exportable="false"
         ></Column>
-        <Column field="portifolio_id" header="Portifolio"></Column>
-        <Column field="composition_id" header="Cardápio"></Column>
+        <Column header="Portifolio">
+          <template #body="slotProps">{{
+            slotProps.data.portifolio.portifolio_description
+          }}</template></Column
+        >
+        <Column header="Cardápio">
+          <template #body="slotProps">{{
+            slotProps.data.composition.composition_name
+          }}</template></Column
+        >
         <Column field="portifolio_composition_order" header="Ordem"></Column>
 
         <Column
