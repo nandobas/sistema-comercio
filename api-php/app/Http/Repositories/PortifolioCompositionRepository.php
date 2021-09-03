@@ -6,22 +6,13 @@ use App\Models\PortifolioComposition;
 class PortifolioCompositionRepository
 {
     public function getRegisters(int $intCod=0){
-        $intCods = 1;
         $return = new PortifolioComposition;
-        $return->query()->where('portifolio_composition_id', $intCods);
-        $return->leftJoin('compositions as c', function($join) 
-        {
-
-            $join->on('c.composition_id', '=', 'portifolio_compositions.composition_id');
-
-        })->get();
         
-        /*if($intCod != 0)              
-            $return = $return->whereRaw("portifolio_composition_id = {$intCod}");           
+        if($intCod != 0)              
+            $return = $return->whereRaw("portifolio_composition_id = {$intCod}");     
         
         $return = $return->orderBy('portifolio_composition_order')
-        ->getQuery()
-        ->get();*/
+        ->get();
 
         if($return)
             $return = $return->toArray();
