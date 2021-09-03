@@ -66,7 +66,6 @@
           style="width: 3rem"
           :exportable="false"
         ></Column>
-        <Column field="portifolio_composition_id" header="ID"></Column>
         <Column field="portifolio_id" header="Portifolio"></Column>
         <Column field="composition_id" header="Cardápio"></Column>
         <Column field="portifolio_composition_order" header="Ordem"></Column>
@@ -104,8 +103,24 @@
       class="p-fluid"
     >
       <div class="p-field">
+        <label for="portifolio_id">Portifolio</label>
+        <InputNumber
+          id="portifolio_id"
+          type="text"
+          v-model="portifolio_composition.portifolio_id"
+        />
+      </div>
+      <div class="p-field">
+        <label for="composition_id">Cardápio</label>
+        <InputNumber
+          id="composition_id"
+          type="text"
+          v-model="portifolio_composition.composition_id"
+        />
+      </div>
+      <div class="p-field">
         <label for="portifolio_composition_order">Ordem</label>
-        <InputText
+        <InputNumber
           id="portifolio_composition_order"
           type="text"
           v-model="portifolio_composition.portifolio_composition_order"

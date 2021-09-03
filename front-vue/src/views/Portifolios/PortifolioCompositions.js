@@ -174,9 +174,9 @@ export default {
       this.selectedPortifolioCompositions.forEach((objRegistro) => {
         let portifolio_composition_id = objRegistro.portifolio_composition_id;
         portifolio_compositionService
-          .deleteSubdivisaoIndice(portifolio_composition_id)
+          .deletePortifolioComposition(portifolio_composition_id)
           .then((data) => {
-            if (!data.deleted || data.menssage) {
+            if (!data.status) {
               Toast.add({
                 severity: "warn",
                 summary: "Atenção!",

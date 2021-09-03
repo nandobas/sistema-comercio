@@ -24,10 +24,15 @@ export default class PortifolioCompositionService {
   }
 
   async deletePortifolioComposition(p_PortifolioComposition) {
+    let tmpObjCompositionService = {
+      data: {
+        int_cod: p_PortifolioComposition,
+      },
+    };
     return axios
       .post(
         process.env.VUE_APP_ROOT_API + "/portifolio_composition/remove",
-        Object.assign({}, p_PortifolioComposition)
+        Object.assign({}, tmpObjCompositionService)
       )
       .then((response) => {
         return response.data;
