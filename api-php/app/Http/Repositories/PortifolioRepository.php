@@ -20,6 +20,12 @@ class PortifolioRepository
         return $return;
     }
 
+    public function findByField(string $nome, string $field="name")
+    {
+        $portifolio = new Portifolio;
+        return $portifolio::where($field, 'like', '%'.$nome.'%')->get();
+    }
+
     public function saveRegister($p_obPortifolio){
 
         $portifolio = null;

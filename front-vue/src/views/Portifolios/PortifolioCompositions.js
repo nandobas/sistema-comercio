@@ -1,9 +1,12 @@
 import PortifolioCompositionService from "../../service/PortifolioCompositionService";
+import PortifolioService from "../../service/PortifolioService";
+import CompositionService from "../../service/CompositionService";
 
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Toolbar from "primevue/toolbar";
 import Dialog from "primevue/dialog";
+import AutoComplete from "primevue/autocomplete";
 import Textarea from "primevue/textarea";
 import Dropdown from "primevue/dropdown";
 import RadioButton from "primevue/radiobutton";
@@ -20,6 +23,7 @@ export default {
     Toolbar,
     Dialog,
     Textarea,
+    AutoComplete,
     Dropdown,
     RadioButton,
     InputNumber,
@@ -40,13 +44,23 @@ export default {
       deletePortifolioCompositionsDialog: false,
       selectedPortifolioCompositions: null,
 
+      selectedPortifolio: null,
+      filteredPortifolio: [],
+
+      selectedComposition: null,
+      filteredComposition: [],
+
       submitted: false,
       intId: 0,
     };
   },
-  PortifolioCompositionService: null,
+  portifolio_compositionService: null,
+  portifolio_service: null,
+  composition_service: null,
   created() {
     this.portifolio_compositionService = new PortifolioCompositionService();
+    this.portifolio_service = new PortifolioService();
+    this.composition_service = new CompositionService();
     this.initFilters();
   },
   mounted() {
@@ -91,6 +105,18 @@ export default {
     hideDialog() {
       this.portifolio_compositionDialog = false;
       this.submitted = false;
+    },
+
+    async searchPortifolio(event) {
+      this.filteredPortifolio = await this.portifolio_service.searchPortifolios(
+        event.query
+      );
+    },
+
+    async searchComposition(event) {
+      this.filteredComposition = await this.composition_service.searchCompositions(
+        event.query
+      );
     },
 
     findIndexById(p_portifolio_composition_id) {

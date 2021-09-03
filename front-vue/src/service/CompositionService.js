@@ -9,6 +9,14 @@ export default class CompositionService {
       });
   }
 
+  async searchCompositions(p_query) {
+    return await axios
+      .get(process.env.VUE_APP_ROOT_API + "/composition/buscar/" + p_query)
+      .then((res) => {
+        return res.data.docs;
+      });
+  }
+
   saveComposition(p_Composition) {
     return axios
       .post(process.env.VUE_APP_ROOT_API + "/composition/save", {

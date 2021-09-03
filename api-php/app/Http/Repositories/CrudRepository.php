@@ -56,11 +56,6 @@ class CrudRepository
         return $recurso;
     }
 
-    public function findByName($nome)
-    {
-        return $this->classe::where('nome', 'like', '%'.$nome.'%')->get();
-    }
-
     public function orderByName()
     {
         return $this->classe::orderBy('nome')->get();

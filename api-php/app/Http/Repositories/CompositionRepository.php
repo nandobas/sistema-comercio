@@ -20,6 +20,12 @@ class CompositionRepository
         return $return;
     }
 
+    public function findByField(string $nome, string $field="name")
+    {
+        $composition = new Composition;
+        return $composition::where($field, 'like', '%'.$nome.'%')->get();
+    }
+
     public function saveRegister($p_obComposition){
 
         $composition = null;

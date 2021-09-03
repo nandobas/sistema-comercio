@@ -112,18 +112,22 @@
     >
       <div class="p-field">
         <label for="portifolio_id">Portifolio</label>
-        <InputNumber
+        <AutoComplete
           id="portifolio_id"
-          type="text"
-          v-model="portifolio_composition.portifolio_id"
+          v-model="selectedPortifolio"
+          :suggestions="filteredPortifolio"
+          @complete="searchPortifolio($event)"
+          field="portifolio_description"
         />
       </div>
       <div class="p-field">
         <label for="composition_id">Cardápio</label>
-        <InputNumber
+        <AutoComplete
           id="composition_id"
-          type="text"
-          v-model="portifolio_composition.composition_id"
+          v-model="selectedComposition"
+          :suggestions="filteredComposition"
+          @complete="searchComposition($event)"
+          field="composition_name"
         />
       </div>
       <div class="p-field">

@@ -9,6 +9,14 @@ export default class PortifolioService {
       });
   }
 
+  async searchPortifolios(p_query) {
+    return await axios
+      .get(process.env.VUE_APP_ROOT_API + "/portifolio/buscar/" + p_query)
+      .then((res) => {
+        return res.data.docs;
+      });
+  }
+
   savePortifolio(p_Portifolio) {
     return axios
       .post(process.env.VUE_APP_ROOT_API + "/portifolio/save", {

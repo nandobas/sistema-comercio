@@ -57,12 +57,14 @@ Route::middleware('api')->post('/product/remove/', 'ProductController@Remove');
 //Portifolio
 Route::middleware('api')->get('/portifolio', 'PortifolioController@List');
 Route::middleware('api')->get('/portifolio/{int_cod}', 'PortifolioController@Get');
+Route::middleware('api')->get('/portifolio/buscar/{nome}', 'PortifolioController@search');
 Route::middleware('api')->post('/portifolio/save/', 'PortifolioController@Save');
 Route::middleware('api')->post('/portifolio/remove/', 'PortifolioController@Remove');
 
 //Composition
 Route::middleware('api')->get('/composition', 'CompositionController@List');
 Route::middleware('api')->get('/composition/{int_cod}', 'CompositionController@Get');
+Route::middleware('api')->get('/composition/buscar/{nome}', 'CompositionController@search');
 Route::middleware('api')->post('/composition/save/', 'CompositionController@Save');
 Route::middleware('api')->post('/composition/remove/', 'CompositionController@Remove');
 

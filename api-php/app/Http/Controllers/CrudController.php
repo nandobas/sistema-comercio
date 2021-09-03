@@ -18,6 +18,13 @@ class CrudController extends Controller
         return response(json_encode($return),200, ['Content-TYpe' => 'application/json']);
     }
 
+    public function search(string $name)
+    {
+        $search = str_replace('-', ' ', $name);
+        $return = $this->service->search($search);
+        return response(json_encode($return),200, ['Content-TYpe' => 'application/json']);
+    }
+
     public function List(){
         $return = $this->service->List();
         return response(json_encode($return),200, ['Content-TYpe' => 'application/json']);

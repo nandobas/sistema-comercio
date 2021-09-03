@@ -26,6 +26,16 @@ class CrudService
        return $return; 
     }
 
+    public function search(string $name, $field="name")
+    {
+        $return = [];
+        $return['docs'] = $this->repository->findByField($name, $field);
+        $return['status']=true; 
+        $return['codeHTTP']=200;
+       
+       return $return;
+    }
+
     public function Save($dados)
     {
         $return = [];
