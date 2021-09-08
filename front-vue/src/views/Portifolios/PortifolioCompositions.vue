@@ -87,13 +87,6 @@
           <template #body="slotProps">
             <Button
               type="button"
-              icon="pi pi-search"
-              class="p-button-success"
-              style="margin-right: .5em"
-              @click="openChidrens(slotProps)"
-            ></Button>
-            <Button
-              type="button"
               icon="pi pi-pencil"
               class="p-button-warning"
               @click="editPortifolioComposition(slotProps)"

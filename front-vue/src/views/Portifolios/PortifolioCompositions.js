@@ -172,6 +172,7 @@ export default {
     },
     editPortifolioComposition(p_portifolio_composition) {
       this.portifolio_composition = { ...p_portifolio_composition.data };
+      this.selectedComposition = this.portifolio_composition.composition;
       this.portifolio_compositionDialog = true;
     },
     confirmDeletePortifolioComposition(portifolio_composition) {
