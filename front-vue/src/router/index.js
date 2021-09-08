@@ -82,12 +82,12 @@ const routes = [
     },
   },
   {
-    path: "/portifolio_composition/:intId",
+    path: "/portifolio_composition/edit/:intId",
     name: "EditPortifolioComposition",
     component: () => import("../views/Portifolios/PortifolioCompositions.vue"),
   },
   {
-    path: "/portifolio_composition",
+    path: "/portifolio_composition/:portfolioId",
     name: "PortifolioCompositions",
     component: () => import("../views/Portifolios/PortifolioCompositions.vue"),
     meta: {

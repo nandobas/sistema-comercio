@@ -9,4 +9,14 @@ class PortifolioCompositionService extends CrudService
     {
         $this->repository = $repository;
     }
+
+    public function filter($p_fields)
+    {
+        $return = [];
+        $return['docs'] = $this->repository->filter($p_fields);
+        $return['status']=true; 
+        $return['codeHTTP']=200;
+       
+       return $return;
+    }
 }

@@ -49,4 +49,27 @@ class PortifolioCompositionRepository
         $portifolio_composition->delete();
         
     }
+
+    public function filter($p_obPortifolioComposition){
+
+        $arr_fields = get_object_vars($p_obPortifolioComposition);
+
+        $return = new PortifolioComposition;
+
+        foreach($arr_fields as $key=>$value){
+            $return = $return->where($key,"=",$value);
+        }
+
+        $return = $return->get();
+
+        /*$return = $return->orderBy('portifolio_composition_order')
+        ->get();*/
+
+        if($return)
+            return $return->toArray();
+
+        return [];
+
+
+    }
 }

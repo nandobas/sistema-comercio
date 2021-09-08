@@ -1,6 +1,14 @@
 import axios from "axios";
 
 export default class PortifolioService {
+  async getPortifolio(p_portifolio_id) {
+    return await axios
+      .get(process.env.VUE_APP_ROOT_API + "/portifolio/" + p_portifolio_id)
+      .then((res) => {
+        return res.data.docs[0];
+      });
+  }
+
   getPortifolios() {
     return axios
       .get(process.env.VUE_APP_ROOT_API + "/portifolio")

@@ -45,18 +45,18 @@ export default {
       selectedPortifolioCompositions: null,
 
       selectedPortifolio: null,
-      filteredPortifolio: [],
 
       selectedComposition: null,
       filteredComposition: [],
 
       submitted: false,
       intId: 0,
+      portfolioId: 0,
     };
   },
   portifolio_compositionService: null,
-  portifolio_service: null,
   composition_service: null,
+  portifolio_service: null,
   created() {
     this.portifolio_compositionService = new PortifolioCompositionService();
     this.portifolio_service = new PortifolioService();
@@ -64,14 +64,15 @@ export default {
     this.initFilters();
   },
   mounted() {
+    if (this.$route.params.intId) this.intId = this.$route.params.intId;
+    if (this.$route.params.portfolioId)
+      this.portfolioId = this.$route.params.portfolioId;
     this.portifolio_compositionService
-      .getPortifolioCompositions()
+      .getPortifolioCompositions(this.portfolioId)
       .then((data) => {
         this.portifolio_compositions = data.docs;
         this.loading = false;
       });
-
-    if (this.$route.params.intId) this.intId = this.$route.params.intId;
   },
   watch: {
     $route(to, from) {
@@ -98,19 +99,16 @@ export default {
       this.intId = p_to.params.intId;
     },
 
-    openNew() {
+    async openNew() {
       this.submitted = false;
+      this.portifolio_composition.portifolio = await this.portifolio_service.getPortifolio(
+        this.portfolioId
+      );
       this.portifolio_compositionDialog = true;
     },
     hideDialog() {
       this.portifolio_compositionDialog = false;
       this.submitted = false;
-    },
-
-    async searchPortifolio(event) {
-      this.filteredPortifolio = await this.portifolio_service.searchPortifolios(
-        event.query
-      );
     },
 
     async searchComposition(event) {
@@ -137,6 +135,10 @@ export default {
       this.submitted = true;
 
       let objPortifolioComposition = { ...this.portifolio_composition };
+
+      objPortifolioComposition.portifolio_id = this.portifolio_composition.portifolio.portifolio_id;
+      objPortifolioComposition.composition_id = this.selectedComposition.composition_id;
+      delete objPortifolioComposition.portifolio;
 
       this.portifolio_compositionService
         .savePortifolioComposition(objPortifolioComposition)

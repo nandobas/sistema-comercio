@@ -85,7 +85,7 @@ export default {
     openChidrens(p_objPortifolio) {
       let portifolio_id = p_objPortifolio.data.portifolio_id;
       this.$router.push({
-        path: "portifolio/portifolio_composition",
+        path: "/portifolio_composition/" + portifolio_id,
       });
     },
 

@@ -70,6 +70,7 @@ Route::middleware('api')->post('/composition/remove/', 'CompositionController@Re
 
 //PortifolioComposition
 Route::middleware('api')->get('/portifolio_composition', 'PortifolioCompositionController@List');
+Route::middleware('api')->get('/portifolio_composition/filter/{obj}', 'PortifolioCompositionController@Filter');
 Route::middleware('api')->get('/portifolio_composition/{int_cod}', 'PortifolioCompositionController@Get');
 Route::middleware('api')->post('/portifolio_composition/save/', 'PortifolioCompositionController@Save');
 Route::middleware('api')->post('/portifolio_composition/remove/', 'PortifolioCompositionController@Remove');

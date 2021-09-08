@@ -106,19 +106,15 @@
     <Dialog
       v-model:visible="portifolio_compositionDialog"
       :style="{ width: '450px' }"
-      header="Detalhes do Portifolio"
+      header="Cardápios do Portifolio"
       :modal="true"
       class="p-fluid"
     >
       <div class="p-field">
-        <label for="portifolio_id">Portifolio</label>
-        <AutoComplete
-          id="portifolio_id"
-          v-model="selectedPortifolio"
-          :suggestions="filteredPortifolio"
-          @complete="searchPortifolio($event)"
-          field="portifolio_description"
-        />
+        <label for="portifolio_id"><b>Portifolio</b>:</label>
+        <label style="padding-left:3px">
+          {{ portifolio_composition.portifolio.portifolio_description }}</label
+        >
       </div>
       <div class="p-field">
         <label for="composition_id">Cardápio</label>

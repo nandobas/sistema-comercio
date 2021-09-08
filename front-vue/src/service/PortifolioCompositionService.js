@@ -1,9 +1,14 @@
 import axios from "axios";
 
 export default class PortifolioCompositionService {
-  getPortifolioCompositions() {
+  getPortifolioCompositions(p_portifolio_id) {
+    let objSearch = { portifolio_id: p_portifolio_id };
     return axios
-      .get(process.env.VUE_APP_ROOT_API + "/portifolio_composition")
+      .get(
+        process.env.VUE_APP_ROOT_API +
+          "/portifolio_composition/filter/" +
+          JSON.stringify(objSearch)
+      )
       .then((res) => {
         return res.data;
       });
