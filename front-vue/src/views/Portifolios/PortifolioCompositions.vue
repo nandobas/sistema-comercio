@@ -28,7 +28,7 @@
         :rows="10"
         :rowsPerPageOptions="[10, 20, 50]"
         :loading="loading"
-        :globalFilterFields="['portifolio_id']"
+        :globalFilterFields="['composition.composition_name']"
         v-model:filters="filters"
         v-model:selection="selectedPortifolioCompositions"
         selectionMode="checkbox"

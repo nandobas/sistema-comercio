@@ -1,5 +1,5 @@
 <template>
-  <div class="portifolios">
+  <div class="blocks">
     <div class="card">
       <Toolbar class="p-mb-4">
         <template #left>
@@ -15,21 +15,21 @@
             style="margin-left:3px;"
             class="p-button-danger"
             @click="confirmDeleteSelected"
-            :disabled="!selectedPortifolios || !selectedPortifolios.length"
+            :disabled="!selectedBlocks || !selectedBlocks.length"
           />
         </template>
       </Toolbar>
       <DataTable
-        :value="portifolios"
+        :value="blocks"
         :paginator="true"
         :rows="10"
         :rowsPerPageOptions="[10, 20, 50]"
         :loading="loading"
-        :globalFilterFields="['portifolio_id', 'portifolio_description']"
+        :globalFilterFields="['block_id', 'block_name']"
         v-model:filters="filters"
-        v-model:selection="selectedPortifolios"
+        v-model:selection="selectedBlocks"
         selectionMode="checkbox"
-        dataKey="portifolio_id"
+        dataKey="block_id"
         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
         currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}"
         filterDisplay="menu"
@@ -63,22 +63,8 @@
           style="width: 3rem"
           :exportable="false"
         ></Column>
-        <Column field="portifolio_id" header="ID"></Column>
-        <Column field="portifolio_description" header="Descrição">
-          <template #body="slotProps">
-            <div @click="openChidrens(slotProps)">
-              {{ slotProps.data.portifolio_description }}
-            </div></template
-          ></Column
-        >
-        <Column field="portifolio_state" header="Ativo/ inativo">
-          <template #body="slotProps">
-            <div @click="openChidrens(slotProps)">
-              <span v-if="slotProps.data.portifolio_state == 0">Inativo</span>
-              <span v-else>Ativo</span>
-            </div></template
-          ></Column
-        >
+        <Column field="block_id" header="ID"></Column>
+        <Column field="block_name" header="Nome"></Column>
 
         <Column
           headerStyle="width: 8em"
@@ -89,16 +75,9 @@
           <template #body="slotProps">
             <Button
               type="button"
-              icon="pi pi-search"
-              class="p-button-success"
-              style="margin-right: .5em"
-              @click="openChidrens(slotProps)"
-            ></Button>
-            <Button
-              type="button"
               icon="pi pi-pencil"
               class="p-button-warning"
-              @click="editPortifolio(slotProps)"
+              @click="editBlock(slotProps)"
             ></Button>
           </template>
         </Column>
@@ -106,27 +85,28 @@
     </div>
 
     <Dialog
-      v-model:visible="portifolioDialog"
+      v-model:visible="blockDialog"
       :style="{ width: '450px' }"
-      header="Detalhes do Portifolio"
+      header="Detalhes do Cardápio"
       :modal="true"
       class="p-fluid"
     >
       <div class="p-field">
-        <label for="portifolio_description">Descrição</label>
-        <InputText
-          id="portifolio_description"
-          type="text"
-          v-model="portifolio.portifolio_description"
+        <label for="block_name">Nome</label>
+        <InputText id="block_name" type="text" v-model="block.block_name" />
+        <label for="block_description">Descrição</label>
+        <Textarea
+          id="block_description"
+          v-model="block.block_description"
+          required="true"
+          rows="3"
+          cols="20"
         />
       </div>
       <div class="p-field">
-        <label for="portifolio_state">Ativo</label>
+        <label for="block_state">Ativo</label>
         <p>
-          <InputSwitch
-            id="portifolio_state"
-            v-model="portifolio.portifolio_state"
-          />
+          <InputSwitch id="block_state" v-model="block.block_state" />
         </p>
       </div>
       <template #footer>
@@ -140,22 +120,21 @@
           label="Salvar"
           icon="pi pi-check"
           class="p-button-text"
-          @click="savePortifolio"
+          @click="saveBlock"
         />
       </template>
     </Dialog>
 
     <Dialog
-      v-model:visible="deletePortifolioDialog"
+      v-model:visible="deleteBlockDialog"
       :style="{ width: '450px' }"
       header="Confirm"
       :modal="true"
     >
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
-        <span v-if="portifolio"
-          >Você tem certeza que deseja remover
-          <b>{{ portifolio.portifolio_description }}</b
+        <span v-if="block"
+          >Você tem certeza que deseja remover <b>{{ block.block_name }}</b
           >?</span
         >
       </div>
@@ -164,42 +143,40 @@
           label="Não"
           icon="pi pi-times"
           class="p-button-text"
-          @click="deletePortifolioDialog = false"
+          @click="deleteBlockDialog = false"
         />
         <Button label="Sim" icon="pi pi-check" class="p-button-text" />
       </template>
     </Dialog>
 
     <Dialog
-      v-model:visible="deletePortifoliosDialog"
+      v-model:visible="deleteBlocksDialog"
       :style="{ width: '450px' }"
       header="Confirmação de Exclusão"
       :modal="true"
     >
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
-        <span v-if="portifolio"
-          >Você tem certeza que deseja remover a seleção?</span
-        >
+        <span v-if="block">Você tem certeza que deseja remover a seleção?</span>
       </div>
       <template #footer>
         <Button
           label="Não"
           icon="pi pi-times"
           class="p-button-text"
-          @click="deletePortifoliosDialog = false"
+          @click="deleteBlocksDialog = false"
         />
         <Button
           label="Sim"
           icon="pi pi-check"
           class="p-button-text"
-          @click="deleteSelectedPortifolios"
+          @click="deleteSelectedBlocks"
         />
       </template>
     </Dialog>
   </div>
 </template>
-<script src="./Portifolios.js"></script>
+<script src="./Blocks.js"></script>
 <style lang="scss">
-@import "./Portifolios.scss";
+@import "./Blocks.scss";
 </style>

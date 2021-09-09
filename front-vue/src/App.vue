@@ -11,10 +11,10 @@
           <router-link to="/logout" @click="bl_state_token = false"
             >Sair</router-link
           >
-        </p>
-        <p>
+          &nbsp;||&nbsp;
           <router-link to="/portifolio">Portifolios</router-link> |
-          <router-link to="/composition">Cardápios</router-link>
+          <router-link to="/composition">Cardápios</router-link> |
+          <router-link to="/block">Blocos</router-link>
         </p>
       </div>
       <div v-else>

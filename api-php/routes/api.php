@@ -74,3 +74,9 @@ Route::middleware('api')->get('/portifolio_composition/filter/{obj}', 'Portifoli
 Route::middleware('api')->get('/portifolio_composition/{int_cod}', 'PortifolioCompositionController@Get');
 Route::middleware('api')->post('/portifolio_composition/save/', 'PortifolioCompositionController@Save');
 Route::middleware('api')->post('/portifolio_composition/remove/', 'PortifolioCompositionController@Remove');
+
+//Block
+Route::middleware('api')->get('/block', 'BlockController@List');
+Route::middleware('api')->get('/block/{int_cod}', 'BlockController@Get');
+Route::middleware('api')->post('/block/save/', 'BlockController@Save');
+Route::middleware('api')->post('/block/remove/', 'BlockController@Remove');

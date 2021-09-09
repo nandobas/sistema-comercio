@@ -94,6 +94,19 @@ const routes = [
       auth: true,
     },
   },
+  {
+    path: "/block/:intId",
+    name: "EditBlock",
+    component: () => import("../views/Blocks/Blocks.vue"),
+  },
+  {
+    path: "/block",
+    name: "Blocks",
+    component: () => import("../views/Blocks/Blocks.vue"),
+    meta: {
+      auth: true,
+    },
+  },
   // // ADMIN ROUTES
   // {
   //   path: "/client",
