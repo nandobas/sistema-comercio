@@ -131,18 +131,18 @@ export default {
 
       return index;
     },
-    savePortifolioComposition() {
+    async savePortifolioComposition() {
       this.submitted = true;
 
       let objPortifolioComposition = { ...this.portifolio_composition };
-
       objPortifolioComposition.portifolio_id = this.portifolio_composition.portifolio.portifolio_id;
       objPortifolioComposition.composition_id = this.selectedComposition.composition_id;
       delete objPortifolioComposition.portifolio;
 
-      this.portifolio_compositionService
+      await this.portifolio_compositionService
         .savePortifolioComposition(objPortifolioComposition)
-        .then((data) => {
+        .then(async (data) => {
+          console.log(data);
           if (objPortifolioComposition.portifolio_composition_id) {
             this.portifolio_compositions[
               this.findIndexById(
@@ -155,14 +155,29 @@ export default {
               detail: "Registro Atualizado",
               life: 3000,
             });
-          } else {
+          } else if (data.status == true) {
             objPortifolioComposition = data.return;
             this.portifolio_compositions.push(objPortifolioComposition);
             this.$toast.add({
               severity: "success",
               summary: "Sucesso",
-              detail: "Registro Criado",
+              detail: "Registro Adicionado",
               life: 3000,
+            });
+          }
+
+          if (data.status === false) {
+            let message = "Erro ao salvar";
+            if (data.message && data.message == "JA_INCLUSO")
+              message =
+                "Cardápio " +
+                this.selectedComposition.composition_name +
+                " já incluso na lista";
+            this.$toast.add({
+              severity: "error",
+              summary: "Erro",
+              detail: message,
+              life: 4000,
             });
           }
         });

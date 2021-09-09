@@ -14,8 +14,8 @@ export default class PortifolioCompositionService {
       });
   }
 
-  savePortifolioComposition(p_PortifolioComposition) {
-    return axios
+  async savePortifolioComposition(p_PortifolioComposition) {
+    return await axios
       .post(process.env.VUE_APP_ROOT_API + "/portifolio_composition/save", {
         data: p_PortifolioComposition,
       })
