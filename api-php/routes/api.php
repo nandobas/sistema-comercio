@@ -80,3 +80,10 @@ Route::middleware('api')->get('/block', 'BlockController@List');
 Route::middleware('api')->get('/block/{int_cod}', 'BlockController@Get');
 Route::middleware('api')->post('/block/save/', 'BlockController@Save');
 Route::middleware('api')->post('/block/remove/', 'BlockController@Remove');
+
+//BlockComposition
+Route::middleware('api')->get('/block_composition', 'BlockCompositionController@List');
+Route::middleware('api')->get('/block_composition/filter/{obj}', 'BlockCompositionController@Filter');
+Route::middleware('api')->get('/block_composition/{int_cod}', 'BlockCompositionController@Get');
+Route::middleware('api')->post('/block_composition/save/', 'BlockCompositionController@Save');
+Route::middleware('api')->post('/block_composition/remove/', 'BlockCompositionController@Remove');

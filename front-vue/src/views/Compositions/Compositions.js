@@ -81,6 +81,13 @@ export default {
       this.intId = p_to.params.intId;
     },
 
+    openChidrens(p_objComposition) {
+      let composition_id = p_objComposition.data.composition_id;
+      this.$router.push({
+        path: "/block_composition/" + composition_id,
+      });
+    },
+
     openNew() {
       this.submitted = false;
       this.compositionDialog = true;

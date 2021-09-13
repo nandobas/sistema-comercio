@@ -1,10 +1,10 @@
 <template>
-  <div class="compositions">
+  <div class="block_compositions">
     <div class="card">
       <Toolbar class="p-mb-4">
         <template #left>
           <Button
-            label="Novo"
+            label="Adicionar"
             icon="pi pi-plus"
             class="p-button-success p-mr-2"
             @click="openNew"
@@ -15,25 +15,26 @@
             style="margin-left:3px;"
             class="p-button-danger"
             @click="confirmDeleteSelected"
-            :disabled="!selectedCompositions || !selectedCompositions.length"
+            :disabled="
+              !selectedBlockCompositions || !selectedBlockCompositions.length
+            "
           />
         </template>
       </Toolbar>
       <DataTable
-        :value="compositions"
+        :value="block_compositions"
         :paginator="true"
         :rows="10"
         :rowsPerPageOptions="[10, 20, 50]"
         :loading="loading"
         :globalFilterFields="[
-          'composition_id',
-          'composition_name',
-          'composition_description',
+          'block.block_name',
+          'composition.composition_name',
         ]"
         v-model:filters="filters"
-        v-model:selection="selectedCompositions"
+        v-model:selection="selectedBlockCompositions"
         selectionMode="checkbox"
-        dataKey="composition_id"
+        dataKey="block_composition_id"
         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
         currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}"
         filterDisplay="menu"
@@ -67,27 +68,17 @@
           style="width: 3rem"
           :exportable="false"
         ></Column>
-        <Column field="composition_id" header="ID"></Column>
-        <Column field="composition_name" header="Nome">
-          <template #body="slotProps">
-            <div @click="openChidrens(slotProps)">
-              {{ slotProps.data.composition_name }}
-            </div></template
-          ></Column
+        <Column header="Cardápio">
+          <template #body="slotProps">{{
+            slotProps.data.composition.composition_name
+          }}</template></Column
         >
-        <Column field="composition_description" header="Descrição">
-          <template #body="slotProps">
-            <div @click="openChidrens(slotProps)">
-              {{ slotProps.data.composition_description }}
-            </div></template
-          ></Column
+        <Column header="Bloco">
+          <template #body="slotProps">{{
+            slotProps.data.block.block_name
+          }}</template></Column
         >
-        <Column field="composition_state" header="Ativo/ inativo">
-          <template #body="slotProps">
-            <span v-if="slotProps.data.composition_state == 0">Inativo</span>
-            <span v-else>Ativo</span></template
-          ></Column
-        >
+        <Column field="block_composition_order" header="Ordem"></Column>
 
         <Column
           headerStyle="width: 8em"
@@ -98,16 +89,9 @@
           <template #body="slotProps">
             <Button
               type="button"
-              icon="pi pi-search"
-              class="p-button-success"
-              style="margin-right: .5em"
-              @click="openChidrens(slotProps)"
-            ></Button>
-            <Button
-              type="button"
               icon="pi pi-pencil"
               class="p-button-warning"
-              @click="editComposition(slotProps)"
+              @click="editBlockComposition(slotProps)"
             ></Button>
           </template>
         </Column>
@@ -115,36 +99,35 @@
     </div>
 
     <Dialog
-      v-model:visible="compositionDialog"
+      v-model:visible="block_compositionDialog"
       :style="{ width: '450px' }"
-      header="Detalhes do Cardápio"
+      header="Cardápios do Block"
       :modal="true"
       class="p-fluid"
     >
       <div class="p-field">
-        <label for="composition_name">Nome</label>
-        <InputText
-          id="composition_name"
-          type="text"
-          v-model="composition.composition_name"
-        />
-        <label for="composition_description">Descrição</label>
-        <Textarea
-          id="composition_description"
-          v-model="composition.composition_description"
-          required="true"
-          rows="3"
-          cols="20"
+        <label for="block_id"><b>Block</b>:</label>
+        <label style="padding-left:3px">
+          {{ block_composition.block.block_description }}</label
+        >
+      </div>
+      <div class="p-field">
+        <label for="composition_id">Cardápio</label>
+        <AutoComplete
+          id="composition_id"
+          v-model="selectedComposition"
+          :suggestions="filteredComposition"
+          @complete="searchComposition($event)"
+          field="composition_name"
         />
       </div>
       <div class="p-field">
-        <label for="composition_state">Ativo</label>
-        <p>
-          <InputSwitch
-            id="composition_state"
-            v-model="composition.composition_state"
-          />
-        </p>
+        <label for="block_composition_order">Ordem</label>
+        <InputNumber
+          id="block_composition_order"
+          type="text"
+          v-model="block_composition.block_composition_order"
+        />
       </div>
       <template #footer>
         <Button
@@ -157,22 +140,22 @@
           label="Salvar"
           icon="pi pi-check"
           class="p-button-text"
-          @click="saveComposition"
+          @click="saveBlockComposition"
         />
       </template>
     </Dialog>
 
     <Dialog
-      v-model:visible="deleteCompositionDialog"
+      v-model:visible="deleteBlockCompositionDialog"
       :style="{ width: '450px' }"
       header="Confirm"
       :modal="true"
     >
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
-        <span v-if="composition"
+        <span v-if="block_composition"
           >Você tem certeza que deseja remover
-          <b>{{ composition.composition_name }}</b
+          <b>{{ block_composition.block_composition_id }}</b
           >?</span
         >
       </div>
@@ -181,21 +164,21 @@
           label="Não"
           icon="pi pi-times"
           class="p-button-text"
-          @click="deleteCompositionDialog = false"
+          @click="deleteBlockCompositionDialog = false"
         />
         <Button label="Sim" icon="pi pi-check" class="p-button-text" />
       </template>
     </Dialog>
 
     <Dialog
-      v-model:visible="deleteCompositionsDialog"
+      v-model:visible="deleteBlockCompositionsDialog"
       :style="{ width: '450px' }"
       header="Confirmação de Exclusão"
       :modal="true"
     >
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
-        <span v-if="composition"
+        <span v-if="block_composition"
           >Você tem certeza que deseja remover a seleção?</span
         >
       </div>
@@ -204,19 +187,19 @@
           label="Não"
           icon="pi pi-times"
           class="p-button-text"
-          @click="deleteCompositionsDialog = false"
+          @click="deleteBlockCompositionsDialog = false"
         />
         <Button
           label="Sim"
           icon="pi pi-check"
           class="p-button-text"
-          @click="deleteSelectedCompositions"
+          @click="deleteSelectedBlockCompositions"
         />
       </template>
     </Dialog>
   </div>
 </template>
-<script src="./Compositions.js"></script>
+<script src="./BlockCompositions.js"></script>
 <style lang="scss">
-@import "./Compositions.scss";
+@import "./BlockCompositions.scss";
 </style>

@@ -107,6 +107,19 @@ const routes = [
       auth: true,
     },
   },
+  {
+    path: "/block_composition/edit/:intId",
+    name: "EditBlockComposition",
+    component: () => import("../views/Compositions/BlockCompositions.vue"),
+  },
+  {
+    path: "/block_composition/:compositionId",
+    name: "BlockCompositions",
+    component: () => import("../views/Compositions/BlockCompositions.vue"),
+    meta: {
+      auth: true,
+    },
+  },
   // // ADMIN ROUTES
   // {
   //   path: "/client",
