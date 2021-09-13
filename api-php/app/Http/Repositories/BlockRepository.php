@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Repositories;
 
-use App\Models\Blocks;
+use App\Models\Block;
 
 class BlockRepository
 {
@@ -17,6 +17,12 @@ class BlockRepository
             $return = $return->toArray();
 
         return $return;
+    }
+
+    public function findByField(string $nome, string $field="name")
+    {
+        $block = new Block;
+        return $block::where($field, 'like', '%'.$nome.'%')->get();
     }
 
     public function saveRegister($p_obBlock){

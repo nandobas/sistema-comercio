@@ -23,7 +23,17 @@ class BlockCompositionService extends CrudService
         $object = (object) $find_with_keys;
         $resp = $this->repository->filter($object);
 
-        if(count($resp) > 0){
+        $update_register = (
+            !isset($dados['block_composition_id']) || 
+            (
+            isset($dados['block_composition_id']) &&
+            $dados['block_composition_id'] == $resp[0]['block_composition_id']
+            ) 
+            ) ? false : true;
+
+        if( $update_register && 
+            count($resp) > 0)
+        {
             $return['message'] = "JA_INCLUSO";
             $return['status']=false; 
             $return['codeHTTP']=200;

@@ -106,19 +106,19 @@
       class="p-fluid"
     >
       <div class="p-field">
-        <label for="block_id"><b>Block</b>:</label>
+        <label for="composition_id"><b>Cadápio</b>:</label>
         <label style="padding-left:3px">
-          {{ block_composition.block.block_description }}</label
+          {{ block_composition.composition.composition_name }}</label
         >
       </div>
       <div class="p-field">
-        <label for="composition_id">Cardápio</label>
+        <label for="block_id">Bloco</label>
         <AutoComplete
-          id="composition_id"
-          v-model="selectedComposition"
-          :suggestions="filteredComposition"
-          @complete="searchComposition($event)"
-          field="composition_name"
+          id="block_id"
+          v-model="selectedBlock"
+          :suggestions="filteredBlock"
+          @complete="searchBlock($event)"
+          field="block_name"
         />
       </div>
       <div class="p-field">

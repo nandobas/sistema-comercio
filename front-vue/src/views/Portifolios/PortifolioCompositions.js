@@ -139,34 +139,42 @@ export default {
       objPortifolioComposition.composition_id = this.selectedComposition.composition_id;
       delete objPortifolioComposition.portifolio;
 
+      let atualiza_dados = objPortifolioComposition.portifolio_composition_id
+        ? true
+        : false;
+
       await this.portifolio_compositionService
         .savePortifolioComposition(objPortifolioComposition)
         .then(async (data) => {
           console.log(data);
-          if (objPortifolioComposition.portifolio_composition_id) {
-            this.portifolio_compositions[
-              this.findIndexById(
-                objPortifolioComposition.portifolio_composition_id
-              )
-            ] = objPortifolioComposition;
-            this.$toast.add({
-              severity: "success",
-              summary: "Sucesso",
-              detail: "Registro Atualizado",
-              life: 3000,
-            });
-          } else if (data.status == true) {
-            objPortifolioComposition = data.return;
-            this.portifolio_compositions.push(objPortifolioComposition);
-            this.$toast.add({
-              severity: "success",
-              summary: "Sucesso",
-              detail: "Registro Adicionado",
-              life: 3000,
-            });
-          }
 
-          if (data.status === false) {
+          if (data.status === true) {
+            if (atualiza_dados) {
+              this.portifolio_compositions[
+                this.findIndexById(
+                  objPortifolioComposition.portifolio_composition_id
+                )
+              ] = data.return;
+              this.$toast.add({
+                severity: "success",
+                summary: "Sucesso",
+                detail: "Registro Atualizado",
+                life: 3000,
+              });
+            } else {
+              objPortifolioComposition = data.return;
+              this.portifolio_compositions.push(objPortifolioComposition);
+              this.$toast.add({
+                severity: "success",
+                summary: "Sucesso",
+                detail: "Registro Adicionado",
+                life: 3000,
+              });
+            }
+
+            this.portifolio_compositionDialog = false;
+            this.portifolio_composition = {};
+          } else {
             let message = "Erro ao salvar";
             if (data.message && data.message == "JA_INCLUSO")
               message =
@@ -181,9 +189,6 @@ export default {
             });
           }
         });
-
-      this.portifolio_compositionDialog = false;
-      this.portifolio_composition = {};
     },
     editPortifolioComposition(p_portifolio_composition) {
       this.portifolio_composition = { ...p_portifolio_composition.data };

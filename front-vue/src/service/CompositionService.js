@@ -1,6 +1,14 @@
 import axios from "axios";
 
 export default class CompositionService {
+  async getComposition(p_composition_id) {
+    return await axios
+      .get(process.env.VUE_APP_ROOT_API + "/composition/" + p_composition_id)
+      .then((res) => {
+        return res.data.docs[0];
+      });
+  }
+
   getCompositions() {
     return axios
       .get(process.env.VUE_APP_ROOT_API + "/composition")

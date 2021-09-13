@@ -78,6 +78,7 @@ Route::middleware('api')->post('/portifolio_composition/remove/', 'PortifolioCom
 //Block
 Route::middleware('api')->get('/block', 'BlockController@List');
 Route::middleware('api')->get('/block/{int_cod}', 'BlockController@Get');
+Route::middleware('api')->get('/block/buscar/{nome}', 'BlockController@search');
 Route::middleware('api')->post('/block/save/', 'BlockController@Save');
 Route::middleware('api')->post('/block/remove/', 'BlockController@Remove');
 

@@ -46,8 +46,8 @@ export default {
 
       selectedBlock: null,
 
-      selectedComposition: null,
-      filteredComposition: [],
+      selectedBlock: null,
+      filteredBlock: [],
 
       submitted: false,
       intId: 0,
@@ -101,7 +101,7 @@ export default {
 
     async openNew() {
       this.submitted = false;
-      this.block_composition.block = await this.block_service.getBlock(
+      this.block_composition.composition = await this.composition_service.getComposition(
         this.compositionId
       );
       this.block_compositionDialog = true;
@@ -111,10 +111,8 @@ export default {
       this.submitted = false;
     },
 
-    async searchComposition(event) {
-      this.filteredComposition = await this.composition_service.searchCompositions(
-        event.query
-      );
+    async searchBlock(event) {
+      this.filteredBlock = await this.block_service.searchBlocks(event.query);
     },
 
     findIndexById(p_block_composition_id) {
@@ -131,45 +129,52 @@ export default {
 
       return index;
     },
-    async saveBlockComposition() {
+    saveBlockComposition() {
       this.submitted = true;
 
       let objBlockComposition = { ...this.block_composition };
-      objBlockComposition.block_id = this.block_composition.block.block_id;
-      objBlockComposition.composition_id = this.selectedComposition.composition_id;
-      delete objBlockComposition.block;
+      objBlockComposition.block_id = this.selectedBlock.block_id;
+      objBlockComposition.composition_id = this.block_composition.composition.composition_id;
+      delete objBlockComposition.composition;
 
-      await this.block_compositionService
+      let atualiza_dados = objBlockComposition.block_composition_id
+        ? true
+        : false;
+
+      this.block_compositionService
         .saveBlockComposition(objBlockComposition)
         .then(async (data) => {
           console.log(data);
-          if (objBlockComposition.block_composition_id) {
-            this.block_compositions[
-              this.findIndexById(objBlockComposition.block_composition_id)
-            ] = objBlockComposition;
-            this.$toast.add({
-              severity: "success",
-              summary: "Sucesso",
-              detail: "Registro Atualizado",
-              life: 3000,
-            });
-          } else if (data.status == true) {
-            objBlockComposition = data.return;
-            this.block_compositions.push(objBlockComposition);
-            this.$toast.add({
-              severity: "success",
-              summary: "Sucesso",
-              detail: "Registro Adicionado",
-              life: 3000,
-            });
-          }
 
-          if (data.status === false) {
+          if (data.status == true) {
+            if (atualiza_dados) {
+              this.block_compositions[
+                this.findIndexById(objBlockComposition.block_composition_id)
+              ] = data.return;
+              this.$toast.add({
+                severity: "success",
+                summary: "Sucesso",
+                detail: "Registro Atualizado",
+                life: 3000,
+              });
+            } else {
+              objBlockComposition = data.return;
+              this.block_compositions.push(objBlockComposition);
+              this.$toast.add({
+                severity: "success",
+                summary: "Sucesso",
+                detail: "Registro Adicionado",
+                life: 3000,
+              });
+            }
+            this.block_compositionDialog = false;
+            this.block_composition = {};
+          } else {
             let message = "Erro ao salvar";
             if (data.message && data.message == "JA_INCLUSO")
               message =
-                "Cardápio " +
-                this.selectedComposition.composition_name +
+                "Bloco " +
+                this.selectedBlock.block_name +
                 " já incluso na lista";
             this.$toast.add({
               severity: "error",
@@ -179,13 +184,10 @@ export default {
             });
           }
         });
-
-      this.block_compositionDialog = false;
-      this.block_composition = {};
     },
     editBlockComposition(p_block_composition) {
       this.block_composition = { ...p_block_composition.data };
-      this.selectedComposition = this.block_composition.composition;
+      this.selectedBlock = this.block_composition.block;
       this.block_compositionDialog = true;
     },
     confirmDeleteBlockComposition(block_composition) {
