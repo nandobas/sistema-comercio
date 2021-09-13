@@ -7,7 +7,7 @@ class BlockRepository
 {
     public function getRegisters(int $intCod=0){
         
-        $return = new Blocks;
+        $return = new Block;
         if($intCod != 0)              
             $return = $return->whereRaw("block_id = {$intCod}");           
         
@@ -29,11 +29,11 @@ class BlockRepository
 
         $block = null;
         if(isset($p_obBlock["block_id"]) && $p_obBlock["block_id"] > 0){
-            $block = Blocks::find($p_obBlock["block_id"]);
+            $block = Block::find($p_obBlock["block_id"]);
         }
         
         if($block == null){
-            $block = new Blocks;
+            $block = new Block;
         }
 
         $block->fill($p_obBlock);
@@ -42,14 +42,14 @@ class BlockRepository
 
         if(isset($block->id))
             $block->block_id = $block->id;
-        $block = Blocks::where("block_id", $block->block_id)->first();
+        $block = Block::where("block_id", $block->block_id)->first();
 
         return $block;
     }
 
     public function RemoveRegister(int $intCod){
 
-        $block = Blocks::findOrFail($intCod);
+        $block = Block::findOrFail($intCod);
         $block->delete();
         
     }
