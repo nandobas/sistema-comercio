@@ -20,12 +20,6 @@ class CreateProvidersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-
-        Schema::table('products', function (Blueprint $table) {
-            $table->foreign( 'provider_id' )
-                    ->references( 'provider_id' )->on( 'providers' )
-                    ->onDelete( 'cascade' );
-        });
     }
 
     /**
