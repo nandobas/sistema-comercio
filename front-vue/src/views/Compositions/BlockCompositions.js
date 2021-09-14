@@ -67,6 +67,7 @@ export default {
     if (this.$route.params.intId) this.intId = this.$route.params.intId;
     if (this.$route.params.compositionId)
       this.compositionId = this.$route.params.compositionId;
+
     this.block_compositionService
       .getBlockCompositions(this.compositionId)
       .then((data) => {
@@ -109,6 +110,7 @@ export default {
 
     async openNew() {
       this.submitted = false;
+
       this.block_composition.composition = await this.composition_service.getComposition(
         this.compositionId
       );

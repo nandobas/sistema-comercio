@@ -99,14 +99,10 @@ export default {
 
     async openNew() {
       this.submitted = false;
-      let search_item = await this.block_composition_service.getBlockCompositions(
+      let search_item = await this.block_composition_service.getBlockComposition(
         this.blockCompositionId
       );
       this.block_item.block_composition = search_item.docs[0];
-      console.log(
-        this.blockCompositionId,
-        this.block_item.block_composition.block_composition_id
-      );
       this.block_itemDialog = true;
     },
     hideDialog() {

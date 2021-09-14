@@ -27,7 +27,8 @@ class BlockCompositionService extends CrudService
             !isset($dados['block_composition_id']) || 
             (
             isset($dados['block_composition_id']) &&
-            $dados['block_composition_id'] == $resp[0]['block_composition_id']
+            (
+                count($resp) > 0 && $dados['block_composition_id'] == $resp[0]['block_composition_id'])
             ) 
             ) ? false : true;
 

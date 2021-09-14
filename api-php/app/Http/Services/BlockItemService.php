@@ -32,7 +32,7 @@ class BlockItemService extends CrudService
             ) 
             ) ? false : true;
 
-        if( $update_register && 
+        if( $update_register || 
             count($resp) > 0)
         {
             $return['message'] = "JA_INCLUSO";
