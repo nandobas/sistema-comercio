@@ -1,10 +1,10 @@
 <template>
-  <div class="block_compositions">
+  <div class="technical_forms">
     <div class="card">
       <Toolbar class="p-mb-4">
         <template #left>
           <Button
-            label="Adicionar Bloco"
+            label="Nova Ficha"
             icon="pi pi-plus"
             class="p-button-success p-mr-2"
             @click="openNew"
@@ -16,25 +16,22 @@
             class="p-button-danger"
             @click="confirmDeleteSelected"
             :disabled="
-              !selectedBlockCompositions || !selectedBlockCompositions.length
+              !selectedTechnicalForms || !selectedTechnicalForms.length
             "
           />
         </template>
       </Toolbar>
       <DataTable
-        :value="block_compositions"
+        :value="technical_forms"
         :paginator="true"
         :rows="10"
         :rowsPerPageOptions="[10, 20, 50]"
         :loading="loading"
-        :globalFilterFields="[
-          'block.block_name',
-          'composition.composition_name',
-        ]"
+        :globalFilterFields="['technical_form_id', 'technical_form_name']"
         v-model:filters="filters"
-        v-model:selection="selectedBlockCompositions"
+        v-model:selection="selectedTechnicalForms"
         selectionMode="checkbox"
-        dataKey="block_composition_id"
+        dataKey="technical_form_id"
         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
         currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}"
         filterDisplay="menu"
@@ -68,17 +65,8 @@
           style="width: 3rem"
           :exportable="false"
         ></Column>
-        <Column header="Cardápio">
-          <template #body="slotProps">{{
-            slotProps.data.composition.composition_name
-          }}</template></Column
-        >
-        <Column header="Bloco">
-          <template #body="slotProps">{{
-            slotProps.data.block.block_name
-          }}</template></Column
-        >
-        <Column field="block_composition_order" header="Ordem"></Column>
+        <Column field="technical_form_id" header="ID"></Column>
+        <Column field="technical_form_name" header="Nome"></Column>
 
         <Column
           headerStyle="width: 8em"
@@ -89,16 +77,9 @@
           <template #body="slotProps">
             <Button
               type="button"
-              icon="pi pi-search"
-              class="p-button-success"
-              style="margin-right: .5em"
-              @click="openChidrens(slotProps)"
-            ></Button>
-            <Button
-              type="button"
               icon="pi pi-pencil"
               class="p-button-warning"
-              @click="editBlockComposition(slotProps)"
+              @click="editTechnicalForm(slotProps)"
             ></Button>
           </template>
         </Column>
@@ -106,34 +87,18 @@
     </div>
 
     <Dialog
-      v-model:visible="block_compositionDialog"
+      v-model:visible="technical_formDialog"
       :style="{ width: '450px' }"
-      header="Bloco do Cardápio"
+      header="Detalhes do Cardápio"
       :modal="true"
       class="p-fluid"
     >
       <div class="p-field">
-        <label for="composition_id"><b>Cadápio</b>:</label>
-        <label style="padding-left:3px">
-          {{ block_composition.composition.composition_name }}</label
-        >
-      </div>
-      <div class="p-field">
-        <label for="block_id">Bloco</label>
-        <AutoComplete
-          id="block_id"
-          v-model="selectedBlock"
-          :suggestions="filteredBlock"
-          @complete="searchBlock($event)"
-          field="block_name"
-        />
-      </div>
-      <div class="p-field">
-        <label for="block_composition_order">Ordem</label>
-        <InputNumber
-          id="block_composition_order"
+        <label for="technical_form_name">Nome</label>
+        <InputText
+          id="technical_form_name"
           type="text"
-          v-model="block_composition.block_composition_order"
+          v-model="technical_form.technical_form_name"
         />
       </div>
       <template #footer>
@@ -147,22 +112,22 @@
           label="Salvar"
           icon="pi pi-check"
           class="p-button-text"
-          @click="saveBlockComposition"
+          @click="saveTechnicalForm"
         />
       </template>
     </Dialog>
 
     <Dialog
-      v-model:visible="deleteBlockCompositionDialog"
+      v-model:visible="deleteTechnicalFormDialog"
       :style="{ width: '450px' }"
       header="Confirm"
       :modal="true"
     >
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
-        <span v-if="block_composition"
+        <span v-if="technical_form"
           >Você tem certeza que deseja remover
-          <b>{{ block_composition.block_composition_id }}</b
+          <b>{{ technical_form.technical_form_name }}</b
           >?</span
         >
       </div>
@@ -171,21 +136,21 @@
           label="Não"
           icon="pi pi-times"
           class="p-button-text"
-          @click="deleteBlockCompositionDialog = false"
+          @click="deleteTechnicalFormDialog = false"
         />
         <Button label="Sim" icon="pi pi-check" class="p-button-text" />
       </template>
     </Dialog>
 
     <Dialog
-      v-model:visible="deleteBlockCompositionsDialog"
+      v-model:visible="deleteTechnicalFormsDialog"
       :style="{ width: '450px' }"
       header="Confirmação de Exclusão"
       :modal="true"
     >
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
-        <span v-if="block_composition"
+        <span v-if="technical_form"
           >Você tem certeza que deseja remover a seleção?</span
         >
       </div>
@@ -194,19 +159,19 @@
           label="Não"
           icon="pi pi-times"
           class="p-button-text"
-          @click="deleteBlockCompositionsDialog = false"
+          @click="deleteTechnicalFormsDialog = false"
         />
         <Button
           label="Sim"
           icon="pi pi-check"
           class="p-button-text"
-          @click="deleteSelectedBlockCompositions"
+          @click="deleteSelectedTechnicalForms"
         />
       </template>
     </Dialog>
   </div>
 </template>
-<script src="./BlockCompositions.js"></script>
+<script src="./TechnicalForms.js"></script>
 <style lang="scss">
-@import "./BlockCompositions.scss";
+@import "./TechnicalForms.scss";
 </style>

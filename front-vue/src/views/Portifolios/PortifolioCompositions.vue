@@ -4,7 +4,7 @@
       <Toolbar class="p-mb-4">
         <template #left>
           <Button
-            label="Adicionar"
+            label="Adicionar Cardápio"
             icon="pi pi-plus"
             class="p-button-success p-mr-2"
             @click="openNew"

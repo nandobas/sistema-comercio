@@ -1,0 +1,56 @@
+::v-deep(.p-paginator) {
+  .p-paginator-current {
+    margin-left: auto;
+  }
+}
+
+::v-deep(.p-progressbar) {
+  height: 0.5rem;
+  background-color: #d8dadc;
+
+  .p-progressbar-value {
+    background-color: #607d8b;
+  }
+}
+
+::v-deep(.p-datepicker) {
+  min-width: 25rem;
+
+  td {
+    font-weight: 400;
+  }
+}
+
+::v-deep(.p-datatable.p-datatable-customers) {
+  .p-datatable-header {
+    padding: 1rem;
+    text-align: left;
+    font-size: 1.5rem;
+  }
+
+  .p-paginator {
+    padding: 1rem;
+  }
+}
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-image {
+  width: 50px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.p-dialog .product-image {
+  width: 50px;
+  margin: 0 auto 2rem auto;
+  display: block;
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

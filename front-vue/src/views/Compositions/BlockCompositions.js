@@ -99,6 +99,14 @@ export default {
       this.intId = p_to.params.intId;
     },
 
+    openChidrens(p_objBlockComposition) {
+      let block_composition_id =
+        p_objBlockComposition.data.block_composition_id;
+      this.$router.push({
+        path: "/block_item/" + block_composition_id,
+      });
+    },
+
     async openNew() {
       this.submitted = false;
       this.block_composition.composition = await this.composition_service.getComposition(

@@ -120,6 +120,32 @@ const routes = [
       auth: true,
     },
   },
+  {
+    path: "/technical_form/:intId",
+    name: "EditTechnicalForm",
+    component: () => import("../views/TechnicalForms/TechnicalForms.vue"),
+  },
+  {
+    path: "/technical_form",
+    name: "TechnicalForm",
+    component: () => import("../views/TechnicalForms/TechnicalForms.vue"),
+    meta: {
+      auth: true,
+    },
+  },
+  {
+    path: "/block_item/edit/:intId",
+    name: "EditBlockItem",
+    component: () => import("../views/Blocks/BlockItems.vue"),
+  },
+  {
+    path: "/block_item/:blockCompositionId",
+    name: "BlockItems",
+    component: () => import("../views/Blocks/BlockItems.vue"),
+    meta: {
+      auth: true,
+    },
+  },
   // // ADMIN ROUTES
   // {
   //   path: "/client",

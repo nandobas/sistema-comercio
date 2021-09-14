@@ -88,3 +88,17 @@ Route::middleware('api')->get('/block_composition/filter/{obj}', 'BlockCompositi
 Route::middleware('api')->get('/block_composition/{int_cod}', 'BlockCompositionController@Get');
 Route::middleware('api')->post('/block_composition/save/', 'BlockCompositionController@Save');
 Route::middleware('api')->post('/block_composition/remove/', 'BlockCompositionController@Remove');
+
+//TechnicalForm
+Route::middleware('api')->get('/technical_form', 'TechnicalFormController@List');
+Route::middleware('api')->get('/technical_form/{int_cod}', 'TechnicalFormController@Get');
+Route::middleware('api')->get('/technical_form/buscar/{nome}', 'TechnicalFormController@search');
+Route::middleware('api')->post('/technical_form/save/', 'TechnicalFormController@Save');
+Route::middleware('api')->post('/technical_form/remove/', 'TechnicalFormController@Remove');
+
+//BlockItens
+Route::middleware('api')->get('/block_item', 'BlockItemController@List');
+Route::middleware('api')->get('/block_item/filter/{obj}', 'BlockItemController@Filter');
+Route::middleware('api')->get('/block_item/{int_cod}', 'BlockItemController@Get');
+Route::middleware('api')->post('/block_item/save/', 'BlockItemController@Save');
+Route::middleware('api')->post('/block_item/remove/', 'BlockItemController@Remove');

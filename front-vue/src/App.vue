@@ -15,6 +15,8 @@
           <router-link to="/portifolio">Portifolios</router-link> |
           <router-link to="/composition">Cardápios</router-link> |
           <router-link to="/block">Blocos</router-link>
+          &nbsp;||&nbsp;
+          <router-link to="/technical_form">Ficha Técnica</router-link>
         </p>
       </div>
       <div v-else>
