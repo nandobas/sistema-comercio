@@ -27,7 +27,8 @@ class BlockItemService extends CrudService
             !isset($dados['block_item_id']) || 
             (
             isset($dados['block_item_id']) &&
-            $dados['block_item_id'] == $resp[0]['block_item_id']
+            (
+                count($resp) > 0 && $dados['block_item_id'] == $resp[0]['block_item_id'])
             ) 
             ) ? false : true;
 

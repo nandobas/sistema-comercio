@@ -1,8 +1,10 @@
 import axios from "axios";
 
 export default class BlockCompositionService {
-  getBlockCompositions(p_composition_id) {
-    let objSearch = { composition_id: p_composition_id };
+  getBlockCompositions(p_block_composition_id) {
+    let objSearch = {
+      block_composition_id: p_block_composition_id,
+    };
     return axios
       .get(
         process.env.VUE_APP_ROOT_API +

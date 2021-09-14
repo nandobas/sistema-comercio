@@ -95,13 +95,13 @@
       class="p-fluid"
     >
       <div class="p-field">
-        <label for="block_composition_id"><b>Bloco do Cadápio</b>:</label>
+        <label for="block_composition_id"><b>Bloco</b>:</label>
         <label style="padding-left:3px">
-          {{ block_item.block_composition.block_composition_id }}</label
+          {{ block_item.block_composition.block.block_name }}</label
         >
       </div>
       <div class="p-field">
-        <label for="technical_form_id">Ficha Técnica</label>
+        <label for="technical_form_id"><b>Ficha Técnica</b>:</label>
         <AutoComplete
           id="technical_form_id"
           v-model="selectedTechnicalForm"

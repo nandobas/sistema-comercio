@@ -11,6 +11,7 @@ class BlockItem extends Model
     public $timestamps = false;
     protected $forceDeleting = true;
     protected $table = 'block_items';
+    protected $primaryKey = 'block_item_id';
     protected $with = ['block_composition', 'technical_form'];
     protected $fillable = ['block_item_id', 'block_composition_id', 'technical_form_id'];
 

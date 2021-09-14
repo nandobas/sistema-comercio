@@ -99,8 +99,13 @@ export default {
 
     async openNew() {
       this.submitted = false;
-      this.block_item.block_composition = await this.block_composition_service.getBlockCompositions(
+      let search_item = await this.block_composition_service.getBlockCompositions(
         this.blockCompositionId
+      );
+      this.block_item.block_composition = search_item.docs[0];
+      console.log(
+        this.blockCompositionId,
+        this.block_item.block_composition.block_composition_id
       );
       this.block_itemDialog = true;
     },
@@ -130,9 +135,8 @@ export default {
       this.submitted = true;
 
       let objBlockItem = { ...this.block_item };
-      objBlockItem.block_id = this.selectedTechnicalForm.block_id;
-      objBlockItem.composition_id = this.block_item.composition.composition_id;
-      delete objBlockItem.composition;
+      objBlockItem.technical_form_id = this.selectedTechnicalForm.technical_form_id;
+      objBlockItem.block_composition_id = this.block_item.block_composition.block_composition_id;
 
       let atualiza_dados = objBlockItem.block_item_id ? true : false;
 
@@ -165,8 +169,8 @@ export default {
           let message = "Erro ao salvar";
           if (data.message && data.message == "JA_INCLUSO")
             message =
-              "Bloco " +
-              this.selectedTechnicalForm.block_name +
+              "Ficha " +
+              this.selectedTechnicalForm.technical_form_name +
               " já incluso na lista";
           this.$toast.add({
             severity: "error",
@@ -179,7 +183,7 @@ export default {
     },
     editBlockItem(p_block_item) {
       this.block_item = { ...p_block_item.data };
-      this.selectedTechnicalForm = this.block_item.block;
+      this.selectedTechnicalForm = this.block_item.technical_form;
       this.block_itemDialog = true;
     },
     confirmDeleteBlockItem(block_item) {
