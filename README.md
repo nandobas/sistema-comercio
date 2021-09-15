@@ -7,15 +7,15 @@ Uma ferramenta indispensável para a gestão mais assertiva de bares e restauran
 O Objetivo do sistema é elaborar a ficha técnica e montagem do cardápio de maneira específica e bem detalhada tanto os ingredientes principais, como os outros produtos que também entram nas receitas e preparos.
 
 - Os itens que não podem faltar em uma ficha técnica são:
-  - o Nome da receita (pode-se utilizar códigos, como nos cardápios)
-  - o Categoria: entrada, salada, prato principal, sobremesa, bebida, etc
-  - o Foto do prato (para padronizar montagem a apresentação)
-  - o Rendimento: individual, para duas pessoas, etc
-  - o Lista de ingredientes: listar todos os insumos utilizados, de temperos a ingredientes principais
-  - o Unidade de medida e quantidade exata de cada item: g, kg, ml, und, etc
-  - o Modo de preparo
-  - o Custo da receita
-  - o Preço praticado
+  - Nome da receita (pode-se utilizar códigos, como nos cardápios)
+  - Categoria: entrada, salada, prato principal, sobremesa, bebida, etc
+  - Foto do prato (para padronizar montagem a apresentação)
+  - Rendimento: individual, para duas pessoas, etc
+  - Lista de ingredientes: listar todos os insumos utilizados, de temperos a ingredientes principais
+  - Unidade de medida e quantidade exata de cada item: g, kg, ml, und, etc
+  - Modo de preparo
+  - Custo da receita
+  - Preço praticado
 
 ## About System
 
