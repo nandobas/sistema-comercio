@@ -1,6 +1,6 @@
 <p align="center">Sistema para Comercio</p>
 
-#Ficha Técnica - Restaurantes
+## Ficha Técnica - Restaurantes
 
 Uma ferramenta indispensável para a gestão mais assertiva de bares e restaurantes, a ficha técnica consiste em um documento detalhado de cada prato/receita, com indicação dos ingredientes utilizados bem como a sua quantidade e modo de preparo. Uma ficha técnica bem elaborada **facilita a vida da equipe e garante o mesmo padrão de qualidade nas receitas**. Empresas do ramo alimentício que desejam ter sucesso no mercado precisam ter o processo de elaboração de seu cardápio bem definido
 
