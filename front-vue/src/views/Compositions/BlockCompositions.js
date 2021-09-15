@@ -110,6 +110,7 @@ export default {
 
     async openNew() {
       this.submitted = false;
+      this.selectedBlock = null;
 
       this.block_composition.composition = await this.composition_service.getComposition(
         this.compositionId

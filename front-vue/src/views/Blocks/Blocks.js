@@ -82,6 +82,7 @@ export default {
     },
 
     openNew() {
+      this.block = {};
       this.submitted = false;
       this.blockDialog = true;
     },
@@ -104,10 +105,10 @@ export default {
     saveBlock() {
       this.submitted = true;
 
-      if (
+      /*if (
         !(this.block.block_description && this.block.block_description.trim())
       )
-        return false;
+        return false;*/
 
       if (!(this.block.block_name && this.block.block_name.trim()))
         return false;

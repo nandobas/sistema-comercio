@@ -12,7 +12,7 @@ class Block extends Model
     protected $forceDeleting = true;
     protected $primaryKey = 'block_id';
     protected $table = 'blocks';
-    protected $fillable = ['block_id', 'block_name'];
+    protected $fillable = ['block_id', 'block_name', 'block_state'];
 
      /**
      * Disable soft deletes for this model

@@ -87,21 +87,21 @@
     <Dialog
       v-model:visible="blockDialog"
       :style="{ width: '450px' }"
-      header="Detalhes do Cardápio"
+      header="Detalhes da Categoria"
       :modal="true"
       class="p-fluid"
     >
       <div class="p-field">
         <label for="block_name">Nome</label>
         <InputText id="block_name" type="text" v-model="block.block_name" />
-        <label for="block_description">Descrição</label>
+        <!-- <label for="block_description">Descrição</label>
         <Textarea
           id="block_description"
           v-model="block.block_description"
           required="true"
           rows="3"
           cols="20"
-        />
+        /> -->
       </div>
       <div class="p-field">
         <label for="block_state">Ativo</label>
