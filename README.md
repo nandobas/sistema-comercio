@@ -1,11 +1,21 @@
 <p align="center">Sistema para Comercio</p>
 
-<p align="left">
-Cadastro de Clientes, Produtos, Fornecedores e Ordem de Serviço
-</p>
-<p align="left">
-Contas a Pagar e Contas a Receber
-</p>
+#Ficha Técnica - Restaurantes
+
+Uma ferramenta indispensável para a gestão mais assertiva de bares e restaurantes, a ficha técnica consiste em um documento detalhado de cada prato/receita, com indicação dos ingredientes utilizados bem como a sua quantidade e modo de preparo. Uma ficha técnica bem elaborada **facilita a vida da equipe e garante o mesmo padrão de qualidade nas receitas**. Empresas do ramo alimentício que desejam ter sucesso no mercado precisam ter o processo de elaboração de seu cardápio bem definido
+
+O Objetivo do sistema é elaborar a ficha técnica e montagem do cardápio de maneira específica e bem detalhada tanto os ingredientes principais, como os outros produtos que também entram nas receitas e preparos.
+
+- Os itens que não podem faltar em uma ficha técnica são:
+  - o Nome da receita (pode-se utilizar códigos, como nos cardápios)
+  - o Categoria: entrada, salada, prato principal, sobremesa, bebida, etc
+  - o Foto do prato (para padronizar montagem a apresentação)
+  - o Rendimento: individual, para duas pessoas, etc
+  - o Lista de ingredientes: listar todos os insumos utilizados, de temperos a ingredientes principais
+  - o Unidade de medida e quantidade exata de cada item: g, kg, ml, und, etc
+  - o Modo de preparo
+  - o Custo da receita
+  - o Preço praticado
 
 ## About System
 

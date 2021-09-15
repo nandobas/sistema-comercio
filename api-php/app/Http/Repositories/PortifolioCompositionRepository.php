@@ -60,10 +60,8 @@ class PortifolioCompositionRepository
             $return = $return->where($key,"=",$value);
         }
 
-        $return = $return->get();
-
-        /*$return = $return->orderBy('portifolio_composition_order')
-        ->get();*/
+        $return = $return->orderBy('portifolio_composition_order')
+        ->get();
 
         if($return)
             return $return->toArray();
